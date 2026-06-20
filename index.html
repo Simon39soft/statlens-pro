@@ -1,276 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StatLens Pro – AI-Powered Analytics</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0a0a0f; color: #e8e8f0; min-height: 100vh; }
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.07); background: rgba(10,10,20,0.95); position: sticky; top: 0; z-index: 100; }
-    .logo { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; color: #fff; }
-    .logo span { color: #7c6ffa; }
-    nav ul { display: flex; gap: 2rem; list-style: none; }
-    nav ul a { color: #a0a0b8; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
-    nav ul a:hover { color: #fff; }
-    .nav-cta { background: #7c6ffa; color: #fff !important; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 500; }
-    .nav-cta:hover { background: #6a5de0 !important; }
-    .hero { text-align: center; padding: 5rem 2rem 3rem; max-width: 760px; margin: 0 auto; }
-    .hero-badge { display: inline-block; background: rgba(124,111,250,0.15); color: #9d91fb; border: 1px solid rgba(124,111,250,0.3); font-size: 0.8rem; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; letter-spacing: 0.04em; }
-    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; color: #fff; margin-bottom: 1.2rem; }
-    .hero h1 span { color: #7c6ffa; }
-    .hero p { color: #8888a8; font-size: 1.05rem; line-height: 1.7; max-width: 560px; margin: 0 auto 2.5rem; }
-    .upload-section { max-width: 660px; margin: 0 auto 4rem; padding: 0 1.5rem; }
-    .upload-card { background: #13131f; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2.5rem; }
-    .upload-card h2 { font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 1.5rem; }
-    .drop-zone { border: 2px dashed rgba(124,111,250,0.35); border-radius: 12px; padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; margin-bottom: 1.5rem; position: relative; }
-    .drop-zone:hover, .drop-zone.dragover { border-color: #7c6ffa; background: rgba(124,111,250,0.05); }
-    .drop-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .drop-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
-    .drop-zone p { color: #6666aa; font-size: 0.9rem; margin-top: 0.4rem; }
-    .drop-zone .drop-title { color: #c0c0e0; font-size: 1rem; font-weight: 500; margin-bottom: 0.3rem; }
-    .file-types { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-top: 0.9rem; }
-    .file-type-badge { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #8888aa; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px; }
-    .selected-file { display: none; align-items: center; gap: 0.75rem; background: rgba(124,111,250,0.1); border: 1px solid rgba(124,111,250,0.25); border-radius: 8px; padding: 0.8rem 1rem; margin-bottom: 1.2rem; font-size: 0.9rem; color: #c0b8ff; }
-    .selected-file .file-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .selected-file .remove-file { background: none; border: none; color: #7c6ffa; cursor: pointer; font-size: 1.1rem; padding: 0; line-height: 1; }
-    .analyze-btn { width: 100%; background: #7c6ffa; color: #fff; border: none; padding: 0.95rem 1.5rem; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; letter-spacing: 0.01em; }
-    .analyze-btn:hover:not(:disabled) { background: #6a5de0; }
-    .analyze-btn:active:not(:disabled) { transform: scale(0.99); }
-    .analyze-btn:disabled { opacity: 0.55; cursor: not-allowed; }
-    .status-box { display: none; margin-top: 1.5rem; border-radius: 10px; padding: 1rem 1.2rem; font-size: 0.92rem; line-height: 1.5; }
-    .status-box.loading { display: flex; align-items: center; gap: 0.75rem; background: rgba(124,111,250,0.08); border: 1px solid rgba(124,111,250,0.2); color: #a09af8; }
-    .status-box.error { display: block; background: rgba(220,60,60,0.08); border: 1px solid rgba(220,60,60,0.25); color: #f08080; }
-    .spinner { width: 18px; height: 18px; border: 2px solid rgba(124,111,250,0.3); border-top-color: #7c6ffa; border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .results-section { display: none; margin-top: 2rem; max-width: 660px; margin-left: auto; margin-right: auto; padding: 0 1.5rem 4rem; }
-    .results-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.2rem; }
-    .results-header h3 { font-size: 1rem; font-weight: 600; color: #fff; }
-    .results-badge { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); font-size: 0.75rem; padding: 0.2rem 0.7rem; border-radius: 100px; }
-    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
-    @media (max-width: 480px) { .metrics-grid { grid-template-columns: 1fr; } }
-    .metric-card { background: #13131f; border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 1.2rem; }
-    .metric-label { font-size: 0.78rem; color: #6666aa; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.5rem; }
-    .metric-value { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; }
-    .metric-value.profit { color: #4ade80; }
-    .metric-value.loss { color: #f87171; }
-    .metric-value.expenses { color: #facc15; }
-    .insights-card { background: #13131f; border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 1.5rem; }
-    .insights-label { font-size: 0.78rem; color: #6666aa; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.8rem; }
-    .insights-text { color: #c0c0e0; font-size: 0.95rem; line-height: 1.75; }
-    .features { max-width: 960px; margin: 0 auto 5rem; padding: 0 1.5rem; }
-    .features-title { text-align: center; font-size: 1.6rem; font-weight: 700; color: #fff; margin-bottom: 0.6rem; }
-    .features-sub { text-align: center; color: #6666aa; font-size: 0.95rem; margin-bottom: 2.5rem; }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; }
-    .feature-card { background: #13131f; border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 1.5rem; }
-    .feature-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
-    .feature-card h4 { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 0.4rem; }
-    .feature-card p { font-size: 0.85rem; color: #6666aa; line-height: 1.6; }
-    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 2rem; text-align: center; color: #444466; font-size: 0.85rem; }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>StatLens Pro — AI Analytics</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070B14;color:#E8EAF0;font-family:system-ui,-apple-system,sans-serif;min-height:100vh}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;background:rgba(7,11,20,0.95);border-bottom:1px solid rgba(255,255,255,0.07);position:sticky;top:0;z-index:100}
+.logo{font-size:1.2rem;font-weight:800;color:#fff}.logo span{color:#6366F1}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:#888;text-decoration:none;font-size:0.9rem}
+.nav-links a:hover{color:#fff}
+.nav-btns{display:flex;gap:0.75rem}
+.btn{padding:0.5rem 1.2rem;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;border:none;transition:all 0.2s}
+.btn-ghost{background:transparent;color:#888;border:1px solid rgba(255,255,255,0.1)}
+.btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,0.3)}
+.btn-primary{background:#6366F1;color:#fff}
+.btn-primary:hover{background:#4F46E5}
+.btn-lg{padding:0.8rem 2rem;font-size:1rem;border-radius:10px}
+.hero{text-align:center;padding:5rem 1.5rem 3rem;max-width:700px;margin:0 auto}
+.badge{display:inline-block;background:rgba(99,102,241,0.15);color:#A5B4FC;border:1px solid rgba(99,102,241,0.3);padding:0.3rem 1rem;border-radius:100px;font-size:0.8rem;margin-bottom:1.5rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.1;color:#fff;margin-bottom:1rem}
+h1 span{color:#6366F1}
+.hero-p{color:#666;font-size:1.05rem;line-height:1.7;margin-bottom:2rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.upload-area{max-width:600px;margin:0 auto 2rem;padding:0 1.5rem}
+.upload-card{background:#0E1220;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:2rem}
+.upload-card h2{font-size:1rem;font-weight:600;color:#fff;margin-bottom:1.2rem}
+.dropbox{border:2px dashed rgba(99,102,241,0.3);border-radius:12px;padding:2.5rem 1rem;text-align:center;margin-bottom:1rem;cursor:pointer;transition:all 0.2s;position:relative}
+.dropbox:hover{border-color:#6366F1;background:rgba(99,102,241,0.04)}
+.dropbox input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-icon{font-size:2rem;margin-bottom:0.5rem}
+.drop-title{color:#ccc;font-size:0.95rem;font-weight:500}
+.drop-sub{color:#555;font-size:0.82rem;margin-top:0.3rem}
+.tags{display:flex;gap:0.4rem;justify-content:center;flex-wrap:wrap;margin-top:0.8rem}
+.tag{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#666;font-size:0.72rem;padding:0.15rem 0.5rem;border-radius:4px}
+.file-chosen{display:none;align-items:center;gap:0.6rem;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:8px;padding:0.7rem 1rem;margin-bottom:1rem;font-size:0.88rem;color:#A5B4FC}
+.file-chosen span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-chosen button{background:none;border:none;color:#6366F1;cursor:pointer;font-size:1rem}
+.run-btn{width:100%;background:#6366F1;color:#fff;border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.2s}
+.run-btn:hover{background:#4F46E5}
+.run-btn:disabled{opacity:0.5;cursor:not-allowed}
+.loading{display:none;text-align:center;padding:1.5rem;color:#6366F1;font-size:0.9rem;align-items:center;gap:0.6rem;justify-content:center}
+.spin{width:18px;height:18px;border:2px solid rgba(99,102,241,0.3);border-top-color:#6366F1;border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{display:none;margin-top:1rem;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:0.8rem 1rem;color:#FCA5A5;font-size:0.88rem}
+.dashboard{display:none;max-width:700px;margin:0 auto 4rem;padding:0 1.5rem}
+.dash-header{display:flex;align-items:center;gap:0.6rem;margin-bottom:1.2rem}
+.dash-header h3{font-size:1rem;font-weight:600;color:#fff}
+.dash-badge{background:rgba(34,197,94,0.15);color:#4ADE80;border:1px solid rgba(34,197,94,0.2);font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:100px}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.8rem;margin-bottom:1rem}
+.metric{background:#0E1220;border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.1rem}
+.metric-label{font-size:0.72rem;color:#555;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.4rem}
+.metric-value{font-size:1.5rem;font-weight:700;letter-spacing:-0.02em}
+.green{color:#4ADE80}.red{color:#F87171}.yellow{color:#FACC15}.blue{color:#60A5FA}
+.panel{background:#0E1220;border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.2rem;margin-bottom:0.8rem}
+.panel-title{font-size:0.78rem;color:#555;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.8rem}
+.alert{display:flex;align-items:flex-start;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;margin-bottom:0.5rem;font-size:0.85rem}
+.alert-warn{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);color:#FCD34D}
+.alert-ok{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);color:#4ADE80}
+.insight-text{color:#A0A8C0;font-size:0.9rem;line-height:1.7}
+.forecast-bars{display:flex;gap:0.5rem;align-items:flex-end;height:80px;margin-top:0.5rem}
+.bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:0.3rem}
+.bar{width:100%;background:#6366F1;border-radius:4px 4px 0 0;transition:height 0.6s}
+.bar-label{font-size:0.65rem;color:#555}
+.features{max-width:900px;margin:0 auto 4rem;padding:0 1.5rem}
+.feat-title{text-align:center;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:0.5rem}
+.feat-sub{text-align:center;color:#555;font-size:0.9rem;margin-bottom:2rem}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem}
+.feat-card{background:#0E1220;border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.2rem}
+.feat-icon{font-size:1.4rem;margin-bottom:0.6rem}
+.feat-card h4{font-size:0.9rem;font-weight:600;color:#fff;margin-bottom:0.3rem}
+.feat-card p{font-size:0.82rem;color:#555;line-height:1.6}
+footer{border-top:1px solid rgba(255,255,255,0.05);padding:1.5rem;text-align:center;color:#333;font-size:0.82rem}
+@media(max-width:480px){.nav-links{display:none}.metrics{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
-  <nav>
-    <div class="logo">Stat<span>Lens</span> Pro</div>
-    <ul>
-      <li><a href="#analyze">Analyze</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#analyze" class="nav-cta">Get Started</a></li>
-    </ul>
-  </nav>
 
-  <section class="hero">
-    <div class="hero-badge">AI-Powered Enterprise Analytics</div>
-    <h1>Turn your data into<br /><span>decisions in seconds</span></h1>
-    <p>Upload CSV, Excel, PDF, or images. StatLens Pro detects anomalies, calculates P&L, and delivers AI-generated forecasts — built for factories, hospitals, retailers, and governments.</p>
-  </section>
+<nav>
+  <div class="logo">Stat<span>Lens</span> Pro</div>
+  <ul class="nav-links">
+    <li><a href="#product">Product</a></li>
+    <li><a href="#solutions">Solutions</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#security">Security</a></li>
+  </ul>
+  <div class="nav-btns">
+    <button class="btn btn-ghost" onclick="runDemo()">Try Demo</button>
+    <button class="btn btn-primary" onclick="runDemo()">View Dashboard</button>
+  </div>
+</nav>
 
-  <div id="analyze" class="upload-section">
-    <div class="upload-card">
-      <h2>Analyze your data</h2>
-      <div class="drop-zone" id="dropZone">
-        <input type="file" id="fileInput" accept=".csv,.xlsx,.xls,.pdf,.png,.jpg,.jpeg,.webp" />
-        <div class="drop-icon">📂</div>
-        <div class="drop-title">Drop your file here or click to browse</div>
-        <p>Supports CSV, Excel, PDF, and images</p>
-        <div class="file-types">
-          <span class="file-type-badge">CSV</span>
-          <span class="file-type-badge">XLSX</span>
-          <span class="file-type-badge">PDF</span>
-          <span class="file-type-badge">PNG</span>
-          <span class="file-type-badge">JPG</span>
-        </div>
+<section class="hero">
+  <div class="badge">Now in Public Beta</div>
+  <h1>Turn business data into <span>decisions</span></h1>
+  <p class="hero-p">AI-powered analytics for CSV, Excel, PDF, and image data. Upload any file and get instant insights, anomaly alerts, and forecasts.</p>
+  <div class="hero-btns">
+    <button class="btn btn-primary btn-lg" onclick="runDemo()">Try Demo</button>
+    <button class="btn btn-ghost btn-lg" onclick="runDemo()">View Dashboard</button>
+  </div>
+</section>
+
+<div class="upload-area">
+  <div class="upload-card">
+    <h2>Analyze your data</h2>
+    <div class="dropbox" id="dropbox">
+      <input type="file" id="fileInput" accept=".csv,.xlsx,.xls,.pdf,.png,.jpg,.jpeg"/>
+      <div class="drop-icon">📂</div>
+      <div class="drop-title">Drop your file here or click to browse</div>
+      <div class="drop-sub">Supports CSV, Excel, PDF, and images</div>
+      <div class="tags">
+        <span class="tag">CSV</span>
+        <span class="tag">XLSX</span>
+        <span class="tag">PDF</span>
+        <span class="tag">PNG</span>
+        <span class="tag">JPG</span>
       </div>
-      <div class="selected-file" id="selectedFile">
-        <span>📄</span>
-        <span class="file-name" id="fileName"></span>
-        <button class="remove-file" id="removeFile" aria-label="Remove file">✕</button>
-      </div>
-      <button class="analyze-btn" id="analyzeBtn">Analyze File</button>
-      <div class="status-box loading" id="loadingBox">
-        <div class="spinner"></div>
-        <span>Analyzing your file — this may take a few seconds…</span>
-      </div>
-      <div class="status-box error" id="errorBox"></div>
+    </div>
+    <div class="file-chosen" id="fileChosen">
+      <span>📄</span>
+      <span id="fileName"></span>
+      <button onclick="clearFile()">✕</button>
+    </div>
+    <button class="run-btn" id="runBtn" onclick="runDemo()">Run Demo Analysis</button>
+    <div class="loading" id="loading">
+      <div class="spin"></div>
+      <span>Analyzing your data…</span>
+    </div>
+    <div class="err" id="errBox"></div>
+  </div>
+</div>
+
+<div class="dashboard" id="dashboard">
+  <div class="dash-header">
+    <h3>Analysis Results</h3>
+    <span class="dash-badge">Complete</span>
+  </div>
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">Revenue</div>
+      <div class="metric-value green" id="mRevenue">$0</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Profit</div>
+      <div class="metric-value green" id="mProfit">$0</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Expenses</div>
+      <div class="metric-value yellow" id="mExpenses">$0</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Growth Rate</div>
+      <div class="metric-value blue" id="mGrowth">0%</div>
     </div>
   </div>
+  <div class="panel">
+    <div class="panel-title">Anomaly Alerts</div>
+    <div class="alert alert-warn">⚠️ Expense spike detected in Q3 — 34% above average</div>
+    <div class="alert alert-warn">⚠️ Revenue dip in August — possible seasonal pattern</div>
+    <div class="alert alert-ok">✓ Profit margin within healthy range</div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">AI Insights</div>
+    <div class="insight-text" id="insightText"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">6-Month Forecast</div>
+    <div class="forecast-bars" id="forecastBars"></div>
+  </div>
+</div>
 
-  <div class="results-section" id="resultsSection">
-    <div class="results-header">
-      <h3>Analysis Results</h3>
-      <span class="results-badge">Complete</span>
+<section class="features">
+  <div class="feat-title">Built for serious data work</div>
+  <div class="feat-sub">Every format. Every industry. Real intelligence.</div>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🔍</div>
+      <h4>Anomaly Detection</h4>
+      <p>Automatically flags outliers and unusual patterns in your financial data.</p>
     </div>
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <div class="metric-label">Profit</div>
-        <div class="metric-value profit" id="metricProfit">—</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">Loss</div>
-        <div class="metric-value loss" id="metricLoss">—</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">Expenses</div>
-        <div class="metric-value expenses" id="metricExpenses">—</div>
-      </div>
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <h4>P&L Calculation</h4>
+      <p>Instant profit, loss, and expense breakdowns from any file format.</p>
     </div>
-    <div class="insights-card">
-      <div class="insights-label">AI Insights</div>
-      <div class="insights-text" id="insightsText">—</div>
+    <div class="feat-card">
+      <div class="feat-icon">🤖</div>
+      <h4>AI Forecasting</h4>
+      <p>Forward-looking projections powered by large language models.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🏭</div>
+      <h4>Industry Ready</h4>
+      <p>Used by factories, hospitals, retailers, and government agencies.</p>
     </div>
   </div>
+</section>
 
-  <section id="features" class="features">
-    <div class="features-title">Built for serious data work</div>
-    <div class="features-sub">Every format. Every industry. Real intelligence.</div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🔍</div>
-        <h4>Anomaly Detection</h4>
-        <p>Automatically flags outliers and unusual patterns in your financial and operational data.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h4>P&L Calculation</h4>
-        <p>Instant profit, loss, and expense breakdowns from any structured data file.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🤖</div>
-        <h4>AI Forecasting</h4>
-        <p>Forward-looking projections generated by large language models trained on business data.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🏭</div>
-        <h4>Industry Ready</h4>
-        <p>Used by factories, hospitals, retailers, and government agencies worldwide.</p>
-      </div>
-    </div>
-  </section>
+<footer>&copy; 2025 StatLens Pro. All rights reserved.</footer>
 
-  <footer>
-    &copy; 2025 StatLens Pro. All rights reserved.
-  </footer>
+<script>
+var fileInput = document.getElementById('fileInput');
+var fileChosen = document.getElementById('fileChosen');
+var fileName = document.getElementById('fileName');
+var runBtn = document.getElementById('runBtn');
+var loading = document.getElementById('loading');
+var errBox = document.getElementById('errBox');
+var dashboard = document.getElementById('dashboard');
+var dropbox = document.getElementById('dropbox');
 
-  <script>
-    const BACKEND = 'https://statlens-pro.onrender.com';
+fileInput.addEventListener('change', function() {
+  if (fileInput.files && fileInput.files[0]) {
+    fileName.textContent = fileInput.files[0].name;
+    fileChosen.style.display = 'flex';
+    dropbox.style.display = 'none';
+  }
+});
 
-    const fileInput = document.getElementById('fileInput');
-    const dropZone = document.getElementById('dropZone');
-    const selectedFile = document.getElementById('selectedFile');
-    const fileName = document.getElementById('fileName');
-    const removeFile = document.getElementById('removeFile');
-    const analyzeBtn = document.getElementById('analyzeBtn');
-    const loadingBox = document.getElementById('loadingBox');
-    const errorBox = document.getElementById('errorBox');
-    const resultsSection = document.getElementById('resultsSection');
+function clearFile() {
+  fileInput.value = '';
+  fileChosen.style.display = 'none';
+  dropbox.style.display = 'block';
+}
 
-    function formatCurrency(value) {
-      if (typeof value !== 'number') return String(value);
-      return '$' + value.toLocaleString();
+function fmt(n) {
+  return '$' + n.toLocaleString();
+}
+
+function runDemo() {
+  errBox.style.display = 'none';
+  dashboard.style.display = 'none';
+  loading.style.display = 'flex';
+  runBtn.disabled = true;
+
+  setTimeout(function() {
+    loading.style.display = 'none';
+    runBtn.disabled = false;
+
+    var revenue = 847500;
+    var expenses = 312400;
+    var profit = revenue - expenses;
+    var growth = 18.4;
+
+    document.getElementById('mRevenue').textContent = fmt(revenue);
+    document.getElementById('mProfit').textContent = fmt(profit);
+    document.getElementById('mExpenses').textContent = fmt(expenses);
+    document.getElementById('mGrowth').textContent = growth + '%';
+
+    document.getElementById('insightText').textContent = 'Revenue has grown consistently over the past 6 months with a compound monthly growth rate of 3.1%. Expense controls are effective, though a Q3 spike warrants review. Profit margins at 63% are strong for this sector. Forecasted revenue for the next quarter is $910,000 based on current trend lines. Recommend maintaining current cost structure while exploring expansion in the highest-performing segment.';
+
+    var bars = document.getElementById('forecastBars');
+    bars.innerHTML = '';
+    var months = ['Jan','Feb','Mar','Apr','May','Jun'];
+    var heights = [45, 52, 58, 63, 70, 78];
+    for (var i = 0; i < months.length; i++) {
+      var wrap = document.createElement('div');
+      wrap.className = 'bar-wrap';
+      var bar = document.createElement('div');
+      bar.className = 'bar';
+      bar.style.height = '0px';
+      var label = document.createElement('div');
+      label.className = 'bar-label';
+      label.textContent = months[i];
+      wrap.appendChild(bar);
+      wrap.appendChild(label);
+      bars.appendChild(wrap);
+      (function(b, h) {
+        setTimeout(function() { b.style.height = h + 'px'; }, 100);
+      })(bar, heights[i]);
     }
-    function showError(msg) {
-      errorBox.textContent = msg;
-      errorBox.style.display = 'block';
-      loadingBox.style.display = 'none';
-    }
-    function hideStatus() {
-      errorBox.style.display = 'none';
-      loadingBox.style.display = 'none';
-    }
-    function showFile(file) {
-      fileName.textContent = file.name;
-      selectedFile.style.display = 'flex';
-      dropZone.style.display = 'none';
-    }
-    function clearFile() {
-      fileInput.value = '';
-      selectedFile.style.display = 'none';
-      dropZone.style.display = 'block';
-      resultsSection.style.display = 'none';
-      hideStatus();
-    }
 
-    fileInput.addEventListener('change', () => {
-      if (fileInput.files[0]) { showFile(fileInput.files[0]); hideStatus(); }
-    });
-    removeFile.addEventListener('click', clearFile);
-    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
-    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-    dropZone.addEventListener('drop', (e) => {
-      e.preventDefault();
-      dropZone.classList.remove('dragover');
-      const file = e.dataTransfer.files[0];
-      if (file) {
-        const dt = new DataTransfer();
-        dt.items.add(file);
-        fileInput.files = dt.files;
-        showFile(file);
-        hideStatus();
-      }
-    });
-
-    analyzeBtn.addEventListener('click', async () => {
-      hideStatus();
-      resultsSection.style.display = 'none';
-      if (!fileInput.files || !fileInput.files[0]) {
-        showError('Please select a file before clicking Analyze.');
-        return;
-      }
-      const formData = new FormData();
-      formData.append('file', fileInput.files[0]);
-      analyzeBtn.disabled = true;
-      loadingBox.style.display = 'flex';
-      try {
-        const response = await fetch(`${BACKEND}/api/analyze/upload`, {
-          method: 'POST',
-          body: formData,
-        });
-        if (!response.ok) {
-          let errMsg = `Server error: ${response.status}`;
-          try { const e = await response.json(); if (e.message) errMsg = e.message; } catch(_) {}
-          showError(errMsg);
-          return;
-        }
-        const data = await response.json();
-        if (!data.success) { showError(data.message || 'Analysis failed. Please try again.'); return; }
-        loadingBox.style.display = 'none';
-        const fin = data.analysis.financials || {};
-        document.getElementById('metricProfit').textContent = formatCurrency(fin.profit ?? 0);
-        document.getElementById('metricLoss').textContent = formatCurrency(fin.loss ?? 0);
-        document.getElementById('metricExpenses').textContent = formatCurrency(fin.expenses ?? 0);
-        document.getElementById('insightsText').textContent = data.analysis.insights || 'No insights returned.';
-        resultsSection.style.display = 'block';
-        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } catch(err) {
-        if (err instanceof TypeError) {
-          showError('Could not reach the server. Please check your connection or try again later.');
-        } else {
-          showError('Something went wrong: ' + err.message);
-        }
-      } finally {
-        analyzeBtn.disabled = false;
-      }
-    });
-  </script>
+    dashboard.style.display = 'block';
+    dashboard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 2000);
+}
+</script>
 </body>
 </html>
