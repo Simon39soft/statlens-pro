@@ -1,0 +1,13 @@
+# Secret environment files
+.env
+.env.*
+!.env.example
+
+# Node.js
+node_modules/
+
+# Logs
+*.log
+
+# Vercel
+.vercel/
