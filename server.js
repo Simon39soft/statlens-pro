@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
-const Anthropic = require('@anthropic-ai/sdk');
 require('dotenv').config();
 
 const app = express();
@@ -10,10 +9,8 @@ const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 524
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', message: 'StatLens Pro backend is running' });
+  res.json({ status: 'ok', message: 'StatLens Pro backend is running', hasKey: !!process.env.ANTHROPIC_API_KEY });
 });
 
 app.post('/api/analyze/upload', upload.single('file'), async (req, res) => {
@@ -22,6 +19,18 @@ app.post('/api/analyze/upload', upload.single('file'), async (req, res) => {
       return res.status(400).json({ success: false, message: 'No file uploaded' });
     }
 
+    let Anthropic;
+    try {
+      Anthropic = require('@anthropic-ai/sdk');
+    } catch (e) {
+      return res.status(500).json({ success: false, message: 'Anthropic SDK not found: ' + e.message });
+    }
+
+    if (!process.env.ANTHROPIC_API_KEY) {
+      return res.status(500).json({ success: false, message: 'ANTHROPIC_API_KEY is missing from environment' });
+    }
+
+    const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
     const file = req.file;
     const mimeType = file.mimetype;
     const fileName = file.originalname;
@@ -29,26 +38,20 @@ app.post('/api/analyze/upload', upload.single('file'), async (req, res) => {
 
     if (mimeType === 'text/csv' || fileName.endsWith('.csv')) {
       const textContent = file.buffer.toString('utf-8');
-      messageContent = [{ type: 'text', text: 'You are a senior data analyst. Analyze this CSV and return ONLY valid JSON, no markdown no backticks:\n\n' + textContent.substring(0, 8000) + '\n\nUse this exact structure: {"insights":"analysis here","financials":{"rows":0,"cols":0,"missing":0,"dupes":0,"quality":0,"mean":0,"median":0,"std":0,"min":0,"max":0,"profit":0,"loss":0,"expenses":0}}' }];
+      messageContent = [{ type: 'text', text: 'Analyze this CSV and return ONLY valid JSON no markdown: {"insights":"analysis here","financials":{"rows":0,"cols":0,"missing":0,"dupes":0,"quality":0,"mean":0,"median":0,"std":0,"min":0,"max":0,"profit":0,"loss":0,"expenses":0}}\n\nCSV DATA:\n' + textContent.substring(0, 4000) }];
     } else if (mimeType.includes('image')) {
       const fileContent = file.buffer.toString('base64');
       messageContent = [
         { type: 'image', source: { type: 'base64', media_type: mimeType, data: fileContent } },
-        { type: 'text', text: 'You are a senior data analyst. Analyze this image and return ONLY valid JSON, no markdown no backticks: {"insights":"analysis here","financials":{"rows":0,"cols":0,"missing":0,"dupes":0,"quality":85,"mean":0,"median":0,"std":0,"min":0,"max":0,"profit":0,"loss":0,"expenses":0}}' }
-      ];
-    } else if (mimeType === 'application/pdf') {
-      const fileContent = file.buffer.toString('base64');
-      messageContent = [
-        { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: fileContent } },
-        { type: 'text', text: 'You are a senior data analyst. Analyze this PDF and return ONLY valid JSON, no markdown no backticks: {"insights":"analysis here","financials":{"rows":0,"cols":0,"missing":0,"dupes":0,"quality":85,"mean":0,"median":0,"std":0,"min":0,"max":0,"profit":0,"loss":0,"expenses":0}}' }
+        { type: 'text', text: 'Analyze this image and return ONLY valid JSON no markdown: {"insights":"analysis here","financials":{"rows":0,"cols":0,"missing":0,"dupes":0,"quality":85,"mean":0,"median":0,"std":0,"min":0,"max":0,"profit":0,"loss":0,"expenses":0}}' }
       ];
     } else {
       const textContent = file.buffer.toString('utf-8');
-      messageContent = [{ type: 'text', text: 'You are a senior data analyst. Analyze this file and return ONLY valid JSON, no markdown no backticks:\n\n' + textContent.substring(0, 8000) + '\n\nUse this exact structure: {"insights":"analysis here","financials":{"rows":0,"cols":0,"missing":0,"dupes":0,"quality":0,"mean":0,"median":0,"std":0,"min":0,"max":0,"profit":0,"loss":0,"expenses":0}}' }];
+      messageContent = [{ type: 'text', text: 'Analyze this data and return ONLY valid JSON no markdown: {"insights":"analysis here","financials":{"rows":0,"cols":0,"missing":0,"dupes":0,"quality":0,"mean":0,"median":0,"std":0,"min":0,"max":0,"profit":0,"loss":0,"expenses":0}}\n\nDATA:\n' + textContent.substring(0, 4000) }];
     }
 
     const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 1024,
       messages: [{ role: 'user', content: messageContent }]
     });
@@ -69,7 +72,6 @@ app.post('/api/analyze/upload', upload.single('file'), async (req, res) => {
     return res.json({ success: true, analysis: analysisData });
 
   } catch (err) {
-    console.error('Analysis error:', err.message);
     return res.status(500).json({ success: false, message: err.message || 'Analysis failed' });
   }
 });
@@ -77,16 +79,14 @@ app.post('/api/analyze/upload', upload.single('file'), async (req, res) => {
 app.post('/api/ask', async (req, res) => {
   try {
     const { question } = req.body;
-    if (!question) {
-      return res.status(400).json({ success: false, message: 'No question provided' });
-    }
-
+    if (!question) return res.status(400).json({ success: false, message: 'No question provided' });
+    const Anthropic = require('@anthropic-ai/sdk');
+    const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
     const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 512,
-      messages: [{ role: 'user', content: 'You are a data analyst. Answer this question clearly: ' + question }]
+      messages: [{ role: 'user', content: 'Answer this data question clearly: ' + question }]
     });
-
     return res.json({ success: true, answer: response.content[0].text });
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message });
