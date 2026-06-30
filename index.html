@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>StatLens Pro — Statistical Analytics Platform</title>
+<title>StatLens — Statistical Analytics Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
-:root{--bg:#f0f4fa;--bg2:#ffffff;--bg3:#e8edf6;--dark:#0a0f1e;--dark2:#111827;--navy:#0f2044;--navy2:#163060;--accent:#2563EB;--accent2:#1d4ed8;--teal:#0891b2;--teal2:#0e7490;--text:#0a0f1e;--muted:#64748b;--muted2:#94a3b8;--border:#dde3ef;--border2:#c8d2e8;--ok:#059669;--warn:#d97706;--err:#dc2626;--r:10px;--rl:16px}
+:root{--bg:#fff8f4;--bg2:#ffffff;--bg3:#fff1e8;--orange:#ea6c1e;--orange2:#c85a10;--orange3:#ff8c42;--dark:#1a0a00;--dark2:#2d1200;--text:#1a0a00;--muted:#7a5a3a;--muted2:#b08060;--border:#f0d5c0;--border2:#e0b898;--ok:#16a34a;--warn:#d97706;--err:#dc2626;--r:10px;--rl:16px}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh}
@@ -14,27 +14,27 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 .app{display:flex;min-height:100vh}
-.sidebar{width:232px;background:var(--navy);position:fixed;top:0;left:0;bottom:0;z-index:200;display:flex;flex-direction:column;transition:transform .3s}
+.sidebar{width:232px;background:var(--dark);position:fixed;top:0;left:0;bottom:0;z-index:200;display:flex;flex-direction:column;transition:transform .3s}
 .main{margin-left:232px;flex:1;display:flex;flex-direction:column}
 .topbar{height:58px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:100}
 .content{padding:24px;max-width:1360px;width:100%}
-.sb-logo{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.sb-logo{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,0.08)}
 .sb-logo-wrap{display:flex;align-items:center;gap:10px}
-.sb-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--accent),var(--teal));border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sb-mark{width:32px;height:32px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sb-mark svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
 .sb-name{font-size:14px;font-weight:800;color:#fff;letter-spacing:-0.2px}
-.sb-name span{color:#60a5fa}
+.sb-name span{color:var(--orange3)}
 .sb-tag{font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase}
 .sb-nav{padding:12px 10px;flex:1;overflow-y:auto}
 .sb-sec{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);padding:0 8px;margin:14px 0 5px}
 .sb-sec:first-child{margin-top:0}
 .sbi{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;color:rgba(255,255,255,0.5);font-size:12.5px;font-weight:500;cursor:pointer;transition:all .17s;border:none;background:none;width:100%;text-align:left;font-family:'Inter',sans-serif}
-.sbi:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
-.sbi.active{background:rgba(37,99,235,0.28);color:#fff;font-weight:600}
+.sbi:hover{background:rgba(234,108,30,0.15);color:rgba(255,255,255,0.88)}
+.sbi.active{background:rgba(234,108,30,0.25);color:#fff;font-weight:600}
 .sbi svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.sb-badge{margin-left:auto;background:var(--accent);color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:100px}
-.sb-bottom{padding:10px;border-top:1px solid rgba(255,255,255,0.05)}
-.demo-note{background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2);color:#fbbf24;font-size:10px;font-weight:600;padding:8px 10px;border-radius:8px;text-align:center;line-height:1.4}
+.sb-badge{margin-left:auto;background:var(--orange);color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:100px}
+.sb-bottom{padding:10px;border-top:1px solid rgba(255,255,255,0.06)}
+.demo-note{background:rgba(234,108,30,0.12);border:1px solid rgba(234,108,30,0.25);color:var(--orange3);font-size:10px;font-weight:600;padding:8px 10px;border-radius:8px;text-align:center;line-height:1.4}
 .topbar-left{display:flex;align-items:center;gap:10px}
 .pg-title{font-size:14px;font-weight:700;color:var(--text)}
 .pg-sub{font-size:11px;color:var(--muted)}
@@ -43,95 +43,89 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .tbtn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
 .tbtn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border2)}
 .tbtn-ghost:hover{color:var(--text)}
-.tbtn-primary{background:var(--accent);color:#fff}
-.tbtn-primary:hover{background:var(--accent2)}
+.tbtn-primary{background:var(--orange);color:#fff}
+.tbtn-primary:hover{background:var(--orange2)}
 .hbg{display:none;background:none;border:none;cursor:pointer;padding:2px}
 .hbg svg{width:20px;height:20px;stroke:var(--text);fill:none;stroke-width:2;stroke-linecap:round}
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:20px}
-.ctitle{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:7px}
-.ctitle svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sec-title{font-size:17px;font-weight:800;color:var(--text);margin-bottom:3px;letter-spacing:-0.3px}
 .sec-sub{font-size:12.5px;color:var(--muted);margin-bottom:16px}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
 .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
 .sb2{margin-bottom:24px}
-.upload-zone{border:2px dashed var(--border2);border-radius:var(--rl);padding:44px 24px;text-align:center;cursor:pointer;transition:all .25s;position:relative;background:linear-gradient(135deg,rgba(37,99,235,0.015),rgba(8,145,178,0.015))}
-.upload-zone:hover,.upload-zone.over{border-color:var(--accent);background:rgba(37,99,235,0.03)}
+.upload-zone{border:2px dashed var(--border2);border-radius:var(--rl);padding:44px 24px;text-align:center;cursor:pointer;transition:all .25s;position:relative;background:linear-gradient(135deg,rgba(234,108,30,0.02),rgba(255,140,66,0.02))}
+.upload-zone:hover,.upload-zone.over{border-color:var(--orange);background:rgba(234,108,30,0.04)}
 .upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.uz-ic{width:52px;height:52px;background:linear-gradient(135deg,rgba(37,99,235,0.1),rgba(8,145,178,0.08));border:1px solid rgba(37,99,235,0.12);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 13px}
-.uz-ic svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round}
+.uz-ic{width:52px;height:52px;background:linear-gradient(135deg,rgba(234,108,30,0.12),rgba(255,140,66,0.08));border:1px solid rgba(234,108,30,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 13px}
+.uz-ic svg{width:22px;height:22px;stroke:var(--orange);fill:none;stroke-width:1.8;stroke-linecap:round}
 .uz-t{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
 .uz-s{font-size:12px;color:var(--muted2);line-height:1.6}
 .uz-tags{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-top:12px}
 .uz-tag{padding:2px 8px;background:var(--bg);border:1px solid var(--border);border-radius:5px;font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace}
-.fp{display:none;align-items:center;gap:10px;background:rgba(37,99,235,0.05);border:1px solid rgba(37,99,235,0.14);border-radius:9px;padding:10px 14px;margin-top:12px}
-.fp-ic{width:34px;height:34px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
-.fp-name{flex:1;font-size:12px;font-weight:600;color:var(--accent);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fp{display:none;align-items:center;gap:10px;background:rgba(234,108,30,0.06);border:1px solid rgba(234,108,30,0.18);border-radius:9px;padding:10px 14px;margin-top:12px}
+.fp-ic{width:34px;height:34px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.fp-name{flex:1;font-size:12px;font-weight:600;color:var(--orange);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fp-sz{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
 .fp-rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:0;min-width:32px;min-height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px}
-.fp-rm:hover{color:var(--err);background:rgba(220,38,38,0.07)}
-.run-btn{width:100%;background:linear-gradient(135deg,var(--accent),var(--teal));color:#fff;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:14px;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px}
+.fp-rm:hover{color:var(--err)}
+.run-btn{width:100%;background:var(--orange);color:#fff;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:14px;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px}
 .run-btn svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round}
-.run-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,99,235,0.28)}
+.run-btn:hover:not(:disabled){background:var(--orange2);transform:translateY(-1px);box-shadow:0 8px 22px rgba(234,108,30,0.3)}
 .run-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none}
 .st-bar{display:none;margin-top:10px;padding:10px 13px;border-radius:8px;font-size:12px;align-items:center;gap:9px}
-.st-load{display:flex;background:rgba(37,99,235,0.05);border:1px solid rgba(37,99,235,0.14);color:var(--accent)}
+.st-load{display:flex;background:rgba(234,108,30,0.06);border:1px solid rgba(234,108,30,0.18);color:var(--orange)}
 .st-err{display:block;background:rgba(220,38,38,0.05);border:1px solid rgba(220,38,38,0.14);color:var(--err)}
-.spin{width:13px;height:13px;border:2px solid rgba(37,99,235,0.18);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.spin{width:13px;height:13px;border:2px solid rgba(234,108,30,0.2);border-top-color:var(--orange);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .prog-wrap{height:3px;background:var(--bg3);border-radius:2px;margin-top:7px;overflow:hidden;display:none}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--teal));width:0%;border-radius:2px;transition:width .35s}
-.ov-bar{background:var(--navy);border-radius:var(--rl);padding:18px 22px;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;position:relative;overflow:hidden;margin-bottom:22px}
-.ov-bar::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,235,0.14),rgba(8,145,178,0.07));pointer-events:none}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--orange3));width:0%;border-radius:2px;transition:width .35s}
+.ov-bar{background:var(--dark);border-radius:var(--rl);padding:18px 22px;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;position:relative;overflow:hidden;margin-bottom:22px}
+.ov-bar::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(234,108,30,0.18),rgba(255,140,66,0.08));pointer-events:none}
 .ov-stat{text-align:center;position:relative;z-index:1;padding:3px 0}
 .ov-stat:not(:last-child)::after{content:'';position:absolute;right:0;top:15%;bottom:15%;width:1px;background:rgba(255,255,255,0.07)}
 .ov-num{font-size:20px;font-weight:800;color:#fff;font-family:'JetBrains Mono',monospace;letter-spacing:-0.5px}
 .ov-lbl{font-size:9px;color:rgba(255,255,255,0.38);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
 .mc{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:15px;transition:all .18s;position:relative;overflow:hidden}
-.mc:hover{border-color:var(--border2);box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .2s}
+.mc:hover{border-color:var(--border2);box-shadow:0 2px 10px rgba(234,108,30,0.08)}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--orange);opacity:0;transition:opacity .2s}
 .mc:hover::before{opacity:1}
-.mc.blue::before{background:linear-gradient(90deg,var(--accent),var(--teal))}
-.mc.teal::before{background:linear-gradient(90deg,var(--teal),var(--teal2))}
-.mc.green::before{background:var(--ok)}
-.mc.warn::before{background:var(--warn)}
-.mc.red::before{background:var(--err)}
 .mc-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:7px}
 .mc-val{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-0.5px;font-family:'JetBrains Mono',monospace;margin-bottom:2px}
 .mc-val.ph{color:var(--muted2);font-size:18px}
 .mc-sub{font-size:10px;color:var(--muted2)}
 .mc-ico{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center}
 .mc-ico svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
-.ic-blue{background:rgba(37,99,235,0.1);color:var(--accent)}
-.ic-teal{background:rgba(8,145,178,0.1);color:var(--teal)}
-.ic-green{background:rgba(5,150,105,0.1);color:var(--ok)}
+.ic-orange{background:rgba(234,108,30,0.1);color:var(--orange)}
+.ic-green{background:rgba(22,163,74,0.1);color:var(--ok)}
 .ic-warn{background:rgba(217,119,6,0.1);color:var(--warn)}
 .ic-red{background:rgba(220,38,38,0.09);color:var(--err)}
 .qs-wrap{text-align:center}
 .qs-ring{width:76px;height:76px;position:relative;margin:0 auto 10px}
 .qs-svg{width:76px;height:76px;transform:rotate(-90deg)}
 .qs-bg{fill:none;stroke:var(--bg3);stroke-width:5.5}
-.qs-fill{fill:none;stroke:url(#qg);stroke-width:5.5;stroke-linecap:round;stroke-dasharray:188;stroke-dashoffset:188;transition:stroke-dashoffset 1.2s ease}
+.qs-fill{fill:none;stroke:var(--orange);stroke-width:5.5;stroke-linecap:round;stroke-dasharray:188;stroke-dashoffset:188;transition:stroke-dashoffset 1.2s ease}
 .qs-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:var(--text);font-family:'JetBrains Mono',monospace}
-.ph-note{display:flex;align-items:center;gap:6px;background:rgba(217,119,6,0.06);border:1px solid rgba(217,119,6,0.15);border-radius:7px;padding:6px 10px;font-size:10.5px;font-weight:600;color:var(--warn);margin-bottom:13px}
+.ph-note{display:flex;align-items:center;gap:6px;background:rgba(234,108,30,0.06);border:1px solid rgba(234,108,30,0.15);border-radius:7px;padding:6px 10px;font-size:10.5px;font-weight:600;color:var(--orange);margin-bottom:13px}
 .ph-note svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
-.chart-ph{background:var(--bg);border:1px dashed var(--border2);border-radius:9px;height:170px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;overflow:hidden}
-.ch-demo-bars{display:flex;gap:5px;align-items:flex-end;height:120px;padding:0 16px;width:100%;margin-top:auto}
-.chb{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(180deg,var(--accent),rgba(37,99,235,0.25));transition:height .7s cubic-bezier(.34,1.56,.64,1)}
-.chb.t{background:linear-gradient(180deg,var(--teal),rgba(8,145,178,0.25))}
-.chb.g{background:linear-gradient(180deg,var(--ok),rgba(5,150,105,0.25))}
-.ch-note{position:absolute;bottom:6px;right:6px;font-size:9px;color:var(--muted2);background:var(--bg2);padding:2px 5px;border-radius:3px;border:1px solid var(--border)}
+.chart-wrap{background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:16px;min-height:180px;position:relative}
+.chart-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.chart-bars{display:flex;gap:4px;align-items:flex-end;height:130px}
+.cbar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.cbar{width:100%;border-radius:3px 3px 0 0;transition:height .7s cubic-bezier(.34,1.56,.64,1);min-height:3px}
+.cbar-lbl{font-size:8px;color:var(--muted2);text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%}
+.chart-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted2);font-size:12px;gap:6px}
+.chart-empty svg{width:24px;height:24px;stroke:var(--border2);fill:none;stroke-width:1.5;stroke-linecap:round}
 .ask-box{position:relative}
 .ask-ta{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:11px 46px 11px 14px;font-size:12.5px;font-family:'Inter',sans-serif;color:var(--text);resize:none;outline:none;transition:border-color .2s;min-height:76px}
-.ask-ta:focus{border-color:var(--accent);background:var(--bg2)}
+.ask-ta:focus{border-color:var(--orange);background:var(--bg2)}
 .ask-ta::placeholder{color:var(--muted2)}
-.ask-send{position:absolute;right:9px;bottom:9px;background:var(--accent);color:#fff;border:none;width:30px;height:30px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s}
-.ask-send:hover{background:var(--accent2)}
+.ask-send{position:absolute;right:9px;bottom:9px;background:var(--orange);color:#fff;border:none;width:30px;height:30px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s}
+.ask-send:hover{background:var(--orange2)}
 .ask-send svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round}
 .ask-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
 .chip{background:var(--bg2);border:1px solid var(--border);border-radius:100px;padding:4px 11px;font-size:11px;color:var(--muted);cursor:pointer;transition:all .17s;white-space:nowrap;font-family:'Inter',sans-serif}
-.chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(37,99,235,0.04)}
+.chip:hover{border-color:var(--orange);color:var(--orange);background:rgba(234,108,30,0.04)}
+.ask-resp{margin-top:12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:14px;font-size:13px;color:var(--text);line-height:1.7;display:none}
 .tab-bar{display:flex;gap:2px;background:var(--bg3);border-radius:8px;padding:3px;margin-bottom:14px}
 .tab{flex:1;padding:7px 10px;border-radius:6px;font-size:11.5px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;transition:all .17s;text-align:center}
 .tab.active{background:var(--bg2);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.07)}
@@ -139,64 +133,58 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .tp.active{display:block}
 .exp-txt{font-size:12.5px;color:var(--muted);line-height:1.75;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:14px}
 .exp-txt.ph{color:var(--muted2);font-style:italic}
-.audio-player{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:var(--rl);padding:20px;color:#fff}
+.audio-player{background:var(--dark);border-radius:var(--rl);padding:20px;color:#fff}
 .ap-lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:13px}
 .ap-controls{display:flex;align-items:center;gap:11px;margin-bottom:12px}
-.ap-play{width:42px;height:42px;background:linear-gradient(135deg,var(--accent),var(--teal));border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
-.ap-play:hover{transform:scale(1.07);box-shadow:0 4px 14px rgba(37,99,235,0.4)}
+.ap-play{width:42px;height:42px;background:var(--orange);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.ap-play:hover{transform:scale(1.07);box-shadow:0 4px 14px rgba(234,108,30,0.4)}
 .ap-play svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round}
 .ap-info{flex:1}
 .ap-track{font-size:12.5px;font-weight:600;color:#fff;margin-bottom:5px}
 .ap-prog-wrap{height:3px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
-.ap-prog{height:100%;background:linear-gradient(90deg,var(--accent),var(--teal));width:0%;border-radius:2px;transition:width .3s}
+.ap-prog{height:100%;background:var(--orange);width:0%;border-radius:2px;transition:width .3s}
 .ap-time{font-size:10px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace;margin-top:4px}
 .ap-speeds{display:flex;gap:5px;align-items:center;margin-bottom:10px}
 .sp-lbl{font-size:10px;color:rgba(255,255,255,0.3);margin-right:2px}
 .ap-spd{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.55);border-radius:5px;padding:3px 9px;font-size:10.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .17s}
-.ap-spd.active,.ap-spd:hover{background:rgba(37,99,235,0.35);color:#fff;border-color:rgba(37,99,235,0.5)}
-.ap-transcript{background:rgba(0,0,0,0.18);border-radius:8px;padding:11px;margin-top:11px;font-size:11.5px;color:rgba(255,255,255,0.45);line-height:1.7;max-height:76px;overflow-y:auto;font-style:italic}
+.ap-spd.active,.ap-spd:hover{background:rgba(234,108,30,0.4);color:#fff;border-color:rgba(234,108,30,0.5)}
+.ap-transcript{background:rgba(0,0,0,0.2);border-radius:8px;padding:11px;margin-top:11px;font-size:11.5px;color:rgba(255,255,255,0.5);line-height:1.7;max-height:80px;overflow-y:auto;font-style:italic}
 .ap-actions{display:flex;gap:7px;margin-top:11px}
-.ap-action{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);color:rgba(255,255,255,0.65);border-radius:7px;padding:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .17s;text-align:center}
-.ap-action:hover{background:rgba(255,255,255,0.11);color:#fff}
+.ap-action{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border-radius:7px;padding:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .17s;text-align:center}
+.ap-action:hover{background:rgba(234,108,30,0.3);color:#fff}
 .act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
 .act-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:17px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.act-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--teal));transform:scaleX(0);transition:transform .22s;transform-origin:left}
-.act-card:hover{border-color:rgba(37,99,235,0.3);box-shadow:0 4px 14px rgba(37,99,235,0.09);transform:translateY(-2px)}
+.act-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--orange);transform:scaleX(0);transition:transform .22s;transform-origin:left}
+.act-card:hover{border-color:rgba(234,108,30,0.3);box-shadow:0 4px 14px rgba(234,108,30,0.1);transform:translateY(-2px)}
 .act-card:hover::after{transform:scaleX(1)}
-.act-ic{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:11px;background:linear-gradient(135deg,rgba(37,99,235,0.09),rgba(8,145,178,0.07));border:1px solid rgba(37,99,235,0.1)}
-.act-ic svg{width:17px;height:17px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.act-ic{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:11px;background:rgba(234,108,30,0.1);border:1px solid rgba(234,108,30,0.15)}
+.act-ic svg{width:17px;height:17px;stroke:var(--orange);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .act-title{font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:3px}
 .act-desc{font-size:11px;color:var(--muted2);line-height:1.5}
-.act-tag{display:inline-block;margin-top:7px;padding:2px 7px;background:rgba(37,99,235,0.07);border:1px solid rgba(37,99,235,0.12);border-radius:100px;font-size:9.5px;font-weight:600;color:var(--accent)}
+.act-tag{display:inline-block;margin-top:7px;padding:2px 7px;background:rgba(234,108,30,0.08);border:1px solid rgba(234,108,30,0.15);border-radius:100px;font-size:9.5px;font-weight:600;color:var(--orange)}
 .rpt-btns{display:flex;gap:9px;flex-wrap:wrap}
 .rbt{padding:9px 18px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .18s;display:flex;align-items:center;gap:6px}
 .rbt svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
 .rbt-dark{background:var(--dark);color:#fff}
 .rbt-dark:hover{background:var(--dark2)}
-.rbt-teal{background:linear-gradient(135deg,var(--teal),var(--teal2));color:#fff}
-.rbt-teal:hover{filter:brightness(1.08)}
-.rbt-green{background:rgba(5,150,105,0.09);color:var(--ok);border:1px solid rgba(5,150,105,0.18)}
-.rbt-green:hover{background:rgba(5,150,105,0.14)}
+.rbt-orange{background:var(--orange);color:#fff}
+.rbt-orange:hover{background:var(--orange2)}
+.rbt-outline{background:transparent;color:var(--orange);border:1.5px solid var(--orange)}
+.rbt-outline:hover{background:rgba(234,108,30,0.06)}
 .hist-list{display:flex;flex-direction:column;gap:7px}
 .hist-item{display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:11px 14px;cursor:pointer;transition:all .18s}
 .hist-item:hover{border-color:var(--border2);background:var(--bg2)}
-.hi-ic{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
-.hi-csv{background:rgba(5,150,105,0.1)}
-.hi-xlsx{background:rgba(37,99,235,0.09)}
-.hi-pdf{background:rgba(220,38,38,0.07)}
+.hi-ic{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;background:rgba(234,108,30,0.1)}
 .hi-info{flex:1}
 .hi-nm{font-size:12.5px;font-weight:600;color:var(--text)}
 .hi-mt{font-size:10.5px;color:var(--muted2);margin-top:1px}
-.hi-sc{font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace}
-.hi-good{background:rgba(5,150,105,0.09);color:var(--ok)}
-.hi-mid{background:rgba(217,119,6,0.09);color:var(--warn)}
+.hi-sc{font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;background:rgba(234,108,30,0.1);color:var(--orange)}
 .empty-h{text-align:center;padding:28px;color:var(--muted2);font-size:12px}
 .empty-h svg{width:28px;height:28px;stroke:var(--border2);fill:none;stroke-width:1.5;stroke-linecap:round;display:block;margin:0 auto 7px}
 .toast{position:fixed;bottom:22px;right:22px;background:var(--dark);color:#fff;border-radius:9px;padding:11px 16px;font-size:12.5px;font-weight:500;box-shadow:0 8px 28px rgba(0,0,0,0.18);z-index:9999;transform:translateY(70px);opacity:0;transition:all .28s;max-width:300px;display:flex;align-items:center;gap:9px}
 .toast.show{transform:translateY(0);opacity:1}
-.toast svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
 .toast.ok-t{border-left:3px solid var(--ok)}
-.toast.warn-t{border-left:3px solid var(--warn)}
+.toast.warn-t{border-left:3px solid var(--orange)}
 @media(max-width:880px){
   .sidebar{transform:translateX(-232px)}
   .sidebar.open{transform:translateX(0)}
@@ -208,7 +196,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
   .ov-stat:not(:last-child)::after{display:none}
 }
 @media(max-width:580px){
-  .g2,.g3,.g5{grid-template-columns:1fr}
+  .g3,.g5{grid-template-columns:1fr}
   .act-grid{grid-template-columns:1fr}
   .content{padding:14px}
   .rpt-btns{flex-direction:column}
@@ -218,15 +206,11 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 </head>
 <body>
 <div class="app">
-
 <aside class="sidebar" id="sidebar">
   <div class="sb-logo">
     <div class="sb-logo-wrap">
       <div class="sb-mark"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <div>
-        <div class="sb-name">Stat<span>Lens</span> Pro</div>
-        <div class="sb-tag">Analytics Platform</div>
-      </div>
+      <div><div class="sb-name">Stat<span>Lens</span></div><div class="sb-tag">Analytics Platform</div></div>
     </div>
   </div>
   <nav class="sb-nav">
@@ -237,7 +221,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
     <button class="sbi" onclick="goto('stats-sec')"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Statistics</button>
     <button class="sbi" onclick="goto('charts-sec')"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Charts</button>
     <div class="sb-sec">Analysis</div>
-    <button class="sbi" onclick="goto('ask-sec')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Ask Your Data</button>
+    <button class="sbi" onclick="goto('ask-sec')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Ask StatLens</button>
     <button class="sbi" onclick="goto('results-sec')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Results<span class="sb-badge">4</span></button>
     <button class="sbi" onclick="goto('audio-sec')"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>Audio</button>
     <button class="sbi" onclick="goto('act-sec')"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Actuarial Tools</button>
@@ -245,26 +229,19 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
     <button class="sbi" onclick="goto('report-sec')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export Report</button>
     <button class="sbi" onclick="goto('hist-sec')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>History</button>
   </nav>
-  <div class="sb-bottom">
-    <div class="demo-note">⚡ Demo Mode<br/>Connect backend to analyze real data</div>
-  </div>
+  <div class="sb-bottom"><div class="demo-note">⚡ StatLens Analytics<br/>Upload a file to begin</div></div>
 </aside>
-
 <div class="main">
   <div class="topbar">
     <div class="topbar-left">
       <button class="hbg" id="hbg" onclick="toggleSB()" aria-label="Menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-      <div>
-        <div class="pg-title">Statistical Analytics Dashboard</div>
-        <div class="pg-sub">Upload a file to begin your analysis</div>
-      </div>
+      <div><div class="pg-title">Statistical Analytics Dashboard</div><div class="pg-sub" id="pgSub">Upload a file to begin your analysis</div></div>
     </div>
     <div class="topbar-right">
-      <button class="tbtn tbtn-ghost" onclick="showToast('Export requires backend connection','warn-t')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button>
+      <button class="tbtn tbtn-ghost" onclick="genReport()"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button>
       <button class="tbtn tbtn-primary" onclick="goto('upload-sec')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>New Analysis</button>
     </div>
   </div>
-
   <div class="content">
     <div class="ov-bar">
       <div class="ov-stat"><div class="ov-num" id="ov-rows">—</div><div class="ov-lbl">Total Rows</div></div>
@@ -273,12 +250,10 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
       <div class="ov-stat"><div class="ov-num" id="ov-qual">—</div><div class="ov-lbl">Quality</div></div>
       <div class="ov-stat"><div class="ov-num" id="ov-anom">—</div><div class="ov-lbl">Anomalies</div></div>
     </div>
-
     <div class="sb2" id="upload-sec">
       <div class="sec-title">Upload Your Data</div>
-      <div class="sec-sub">CSV, Excel (.xlsx), PDF, or image files. Files are never stored after analysis.</div>
+      <div class="sec-sub">CSV, Excel, PDF, or image files. Files are never stored after analysis.</div>
       <div class="card">
-        <!-- BACKEND: POST /api/analyze/upload with FormData field "file" -->
         <div class="upload-zone" id="uz">
           <input type="file" id="fi" accept=".csv,.xlsx,.xls,.pdf,.png,.jpg,.jpeg,.webp" aria-label="Upload file"/>
           <div class="uz-ic"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
@@ -297,58 +272,48 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           Run Analysis
         </button>
-        <div class="st-bar st-load" id="stLoad"><div class="spin"></div><span id="stTxt">Uploading…</span></div>
+        <div class="st-bar st-load" id="stLoad"><div class="spin"></div><span id="stTxt">Analyzing your data…</span></div>
         <div class="st-bar st-err" id="stErr"></div>
       </div>
     </div>
-
     <div class="sb2" id="quality-sec">
       <div class="sec-title">Data Quality</div>
       <div class="sec-sub">Dataset structure, completeness, and quality score.</div>
-      <div class="ph-note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Demo placeholders — connect backend to see real quality metrics</div>
-      <!-- BACKEND: GET /api/analyze/quality -->
+      <div class="ph-note" id="phNote"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Upload a file and run analysis to see real quality metrics</div>
       <div class="g5">
-        <div class="mc blue"><div class="mc-ico ic-blue"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div class="mc-lbl">Total Rows</div><div class="mc-val ph" id="dq-rows">—</div><div class="mc-sub">Records in dataset</div></div>
-        <div class="mc teal"><div class="mc-ico ic-teal"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div><div class="mc-lbl">Total Columns</div><div class="mc-val ph" id="dq-cols">—</div><div class="mc-sub">Features detected</div></div>
-        <div class="mc warn"><div class="mc-ico ic-warn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="mc-lbl">Missing Values</div><div class="mc-val ph" id="dq-miss">—</div><div class="mc-sub">Null / empty cells</div></div>
-        <div class="mc red"><div class="mc-ico ic-red"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="mc-lbl">Duplicate Rows</div><div class="mc-val ph" id="dq-dupe">—</div><div class="mc-sub">Identical records</div></div>
-        <div class="mc green" style="text-align:center"><div class="mc-lbl" style="text-align:center">Quality Score</div><div class="qs-wrap"><div class="qs-ring"><svg class="qs-svg" viewBox="0 0 36 36"><defs><linearGradient id="qg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:var(--accent)"/><stop offset="100%" style="stop-color:var(--teal)"/></linearGradient></defs><circle class="qs-bg" cx="18" cy="18" r="15.9"/><circle class="qs-fill" id="qsFill" cx="18" cy="18" r="15.9"/></svg><div class="qs-num" id="qsNum">—</div></div><div class="mc-sub" id="qsSub">Upload to score</div></div></div>
+        <div class="mc"><div class="mc-ico ic-orange"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div class="mc-lbl">Total Rows</div><div class="mc-val ph" id="dq-rows">—</div><div class="mc-sub">Records in dataset</div></div>
+        <div class="mc"><div class="mc-ico ic-orange"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div><div class="mc-lbl">Total Columns</div><div class="mc-val ph" id="dq-cols">—</div><div class="mc-sub">Features detected</div></div>
+        <div class="mc"><div class="mc-ico ic-warn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="mc-lbl">Missing Values</div><div class="mc-val ph" id="dq-miss">—</div><div class="mc-sub">Null / empty cells</div></div>
+        <div class="mc"><div class="mc-ico ic-red"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="mc-lbl">Duplicate Rows</div><div class="mc-val ph" id="dq-dupe">—</div><div class="mc-sub">Identical records</div></div>
+        <div class="mc" style="text-align:center"><div class="mc-lbl" style="text-align:center">Quality Score</div><div class="qs-wrap"><div class="qs-ring"><svg class="qs-svg" viewBox="0 0 36 36"><circle class="qs-bg" cx="18" cy="18" r="15.9"/><circle class="qs-fill" id="qsFill" cx="18" cy="18" r="15.9"/></svg><div class="qs-num" id="qsNum">—</div></div><div class="mc-sub" id="qsSub">Upload to score</div></div></div>
       </div>
     </div>
-
     <div class="sb2" id="stats-sec">
       <div class="sec-title">Descriptive Statistics</div>
       <div class="sec-sub">Key statistical measures from your numeric columns.</div>
-      <div class="ph-note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Demo placeholders — connect backend to calculate real statistics</div>
-      <!-- BACKEND: GET /api/analyze/stats -->
       <div class="g5">
-        <div class="mc blue"><div class="mc-ico ic-blue"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="mc-lbl">Mean</div><div class="mc-val ph" id="st-mean">—</div><div class="mc-sub">Arithmetic average</div></div>
-        <div class="mc teal"><div class="mc-ico ic-teal"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="mc-lbl">Median</div><div class="mc-val ph" id="st-med">—</div><div class="mc-sub">Middle value</div></div>
-        <div class="mc warn"><div class="mc-ico ic-warn"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="mc-lbl">Std Deviation</div><div class="mc-val ph" id="st-std">—</div><div class="mc-sub">Spread of values</div></div>
-        <div class="mc green"><div class="mc-ico ic-green"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div><div class="mc-lbl">Minimum</div><div class="mc-val ph" id="st-min">—</div><div class="mc-sub">Lowest value</div></div>
-        <div class="mc red"><div class="mc-ico ic-red"><svg viewBox="0 0 24 24"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg></div><div class="mc-lbl">Maximum</div><div class="mc-val ph" id="st-max">—</div><div class="mc-sub">Highest value</div></div>
+        <div class="mc"><div class="mc-ico ic-orange"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="mc-lbl">Mean</div><div class="mc-val ph" id="st-mean">—</div><div class="mc-sub">Arithmetic average</div></div>
+        <div class="mc"><div class="mc-ico ic-orange"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="mc-lbl">Median</div><div class="mc-val ph" id="st-med">—</div><div class="mc-sub">Middle value</div></div>
+        <div class="mc"><div class="mc-ico ic-warn"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="mc-lbl">Std Deviation</div><div class="mc-val ph" id="st-std">—</div><div class="mc-sub">Spread of values</div></div>
+        <div class="mc"><div class="mc-ico ic-green"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div><div class="mc-lbl">Minimum</div><div class="mc-val ph" id="st-min">—</div><div class="mc-sub">Lowest value</div></div>
+        <div class="mc"><div class="mc-ico ic-red"><svg viewBox="0 0 24 24"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg></div><div class="mc-lbl">Maximum</div><div class="mc-val ph" id="st-max">—</div><div class="mc-sub">Highest value</div></div>
       </div>
     </div>
-
     <div class="sb2" id="charts-sec">
       <div class="sec-title">Charts & Visualizations</div>
-      <div class="sec-sub">Visual representations of your data patterns.</div>
-      <div class="ph-note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Chart placeholders — connect backend to render real visualizations</div>
-      <!-- BACKEND: GET /api/analyze/charts returns chart data -->
-      <div class="g3">
-        <div class="card"><div class="ctitle"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trend Chart</div><div class="chart-ph"><div class="ch-demo-bars" id="trend-bars"></div><div class="ch-note">Demo data</div></div></div>
-        <div class="card"><div class="ctitle"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Distribution</div><div class="chart-ph"><div class="ch-demo-bars" id="dist-bars"></div><div class="ch-note">Demo data</div></div></div>
-        <div class="card"><div class="ctitle"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Category Comparison</div><div class="chart-ph"><div class="ch-demo-bars" id="cat-bars"></div><div class="ch-note">Demo data</div></div></div>
+      <div class="sec-sub">Visual representations of your data — automatically generated from your file.</div>
+      <div class="g3" id="chartsGrid">
+        <div class="card"><div class="chart-title">Revenue / Main Column</div><div class="chart-wrap" id="chart1"><div class="chart-empty"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Upload data to see chart</div></div></div>
+        <div class="card"><div class="chart-title">Expenses / Secondary</div><div class="chart-wrap" id="chart2"><div class="chart-empty"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Upload data to see chart</div></div></div>
+        <div class="card"><div class="chart-title">Profit / Third Column</div><div class="chart-wrap" id="chart3"><div class="chart-empty"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Upload data to see chart</div></div></div>
       </div>
     </div>
-
     <div class="sb2" id="ask-sec">
-      <div class="sec-title">Ask About Your Data</div>
-      <div class="sec-sub">Type a question in plain English and get an AI-powered answer.</div>
+      <div class="sec-title">Ask StatLens</div>
+      <div class="sec-sub">Ask any question about your data or statistics in plain English.</div>
       <div class="card">
-        <!-- BACKEND: POST /api/ask with { question: "..." } -->
         <div class="ask-box">
-          <textarea class="ask-ta" id="askTA" placeholder="e.g. What is the average revenue per quarter? Which months show the highest expenses?" rows="3" aria-label="Ask a question about your data"></textarea>
+          <textarea class="ask-ta" id="askTA" placeholder="e.g. What is the average revenue? Which month had the highest profit? Are there any anomalies?" rows="3" aria-label="Ask a question"></textarea>
           <button class="ask-send" onclick="sendQ()" aria-label="Send"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
         </div>
         <div class="ask-chips">
@@ -358,42 +323,36 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
           <div class="chip" onclick="setQ(this)">What is the year-over-year growth?</div>
           <div class="chip" onclick="setQ(this)">Summarize this dataset</div>
         </div>
-        <div id="ask-resp" style="margin-top:12px;display:none"><div class="exp-txt" id="ask-resp-txt"></div></div>
+        <div class="ask-resp" id="askResp" id="ask-resp-txt"></div>
       </div>
     </div>
-
     <div class="sb2" id="results-sec">
       <div class="sec-title">Analysis Results</div>
-      <div class="sec-sub">Four perspectives on your data — from simple to technical.</div>
+      <div class="sec-sub">Four perspectives on your data.</div>
       <div class="card">
-        <!-- BACKEND: GET /api/analyze/explain returns { simple, technical, business, warnings } -->
         <div class="tab-bar" role="tablist">
           <button class="tab active" onclick="swTab('simple',this)" role="tab">Simple</button>
           <button class="tab" onclick="swTab('technical',this)" role="tab">Technical</button>
           <button class="tab" onclick="swTab('business',this)" role="tab">Business</button>
           <button class="tab" onclick="swTab('warnings',this)" role="tab">Warnings</button>
         </div>
-        <div class="tp active" id="tp-simple"><div class="exp-txt ph" id="txt-simple">Upload a file and run analysis to see a plain-English summary. No jargon — clear, actionable insights for everyone.</div></div>
-        <div class="tp" id="tp-technical"><div class="exp-txt ph" id="txt-tech">Technical statistical breakdown appears here after analysis. Includes distribution tests, correlation matrix, significance testing, and model diagnostics.</div></div>
-        <div class="tp" id="tp-business"><div class="exp-txt ph" id="txt-biz">Business interpretation appears here. Revenue implications, KPI benchmarks, trend analysis, and strategic recommendations based on your data.</div></div>
-        <div class="tp" id="tp-warnings"><div class="exp-txt ph" id="txt-warn">Data quality warnings, statistical assumptions, limitations, and suggested improvements appear here after upload.</div></div>
+        <div class="tp active" id="tp-simple"><div class="exp-txt ph" id="txt-simple">Upload a file and run analysis to see a plain-English summary of your data.</div></div>
+        <div class="tp" id="tp-technical"><div class="exp-txt ph" id="txt-tech">Technical statistical breakdown appears here after analysis.</div></div>
+        <div class="tp" id="tp-business"><div class="exp-txt ph" id="txt-biz">Business interpretation and recommendations appear here after analysis.</div></div>
+        <div class="tp" id="tp-warnings"><div class="exp-txt ph" id="txt-warn">Data quality warnings and limitations appear here after analysis.</div></div>
       </div>
     </div>
-
     <div class="sb2" id="audio-sec">
       <div class="sec-title">Listen to Explanation</div>
-      <div class="sec-sub">Audio narration of your analysis with playback speed control.</div>
-      <!-- BACKEND: POST /api/tts returns audio stream -->
+      <div class="sec-sub">Audio narration of your analysis results.</div>
       <div class="audio-player">
         <div class="ap-lbl">Audio Explanation</div>
         <div class="ap-controls">
-          <button class="ap-play" id="apPlay" onclick="togglePlay()" aria-label="Play/Pause">
-            <svg id="apIcon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </button>
+          <button class="ap-play" id="apPlay" onclick="togglePlay()" aria-label="Play/Pause"><svg id="apIcon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
           <div class="ap-info">
             <div class="ap-track" id="apTrack">Run analysis to generate audio explanation</div>
             <div class="ap-prog-wrap"><div class="ap-prog" id="apProg"></div></div>
-            <div class="ap-time" id="apTime">0:00 / 1:30</div>
+            <div class="ap-time" id="apTime">0:00 / 0:00</div>
           </div>
         </div>
         <div class="ap-speeds">
@@ -402,188 +361,177 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
           <button class="ap-spd" onclick="setSpd(1.25,this)">1.25x</button>
           <button class="ap-spd" onclick="setSpd(1.5,this)">1.5x</button>
         </div>
-        <div class="ap-transcript" id="apTx">Transcript will appear here when audio is playing. Upload your data and run analysis to generate an audio walkthrough of your results.</div>
+        <div class="ap-transcript" id="apTx">Transcript will appear here after analysis. StatLens will read your results aloud.</div>
         <div class="ap-actions">
-          <button class="ap-action" onclick="showToast('Requires backend connection','warn-t')">🔤 Explain More Simply</button>
-          <button class="ap-action" onclick="showToast('Requires backend connection','warn-t')">📊 Explain This Chart</button>
+          <button class="ap-action" onclick="simplifyExplanation()">🔤 Explain More Simply</button>
+          <button class="ap-action" onclick="explainChart()">📊 Explain This Chart</button>
         </div>
       </div>
     </div>
-
     <div class="sb2" id="act-sec">
       <div class="sec-title">Actuarial Tools</div>
       <div class="sec-sub">Specialized tools for actuaries, statisticians, and risk analysts.</div>
-      <!-- BACKEND: POST /api/actuarial/:toolName -->
       <div class="act-grid">
-        <div class="act-card" onclick="openTool('claims-freq')"><div class="act-ic"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="act-title">Claims Frequency & Severity</div><div class="act-desc">Fit frequency distributions (Poisson, Negative Binomial) and severity models to claims data.</div><span class="act-tag">Insurance</span></div>
-        <div class="act-card" onclick="openTool('loss-ratio')"><div class="act-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="act-title">Loss Ratio Analysis</div><div class="act-desc">Calculate incurred losses to earned premium. Benchmark against industry standards.</div><span class="act-tag">P&amp;C</span></div>
-        <div class="act-card" onclick="openTool('combined-ratio')"><div class="act-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div><div class="act-title">Combined Ratio</div><div class="act-desc">Compute loss + expense ratio. Track underwriting profitability across periods.</div><span class="act-tag">Underwriting</span></div>
-        <div class="act-card" onclick="openTool('reserving')"><div class="act-ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="act-title">Claims Reserving</div><div class="act-desc">Chain-ladder, Bornhuetter-Ferguson, and Cape Cod methods for IBNR estimation.</div><span class="act-tag">Reserving</span></div>
-        <div class="act-card" onclick="openTool('scenario')"><div class="act-ic"><svg viewBox="0 0 24 24"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 4v16"/></svg></div><div class="act-title">Scenario Testing</div><div class="act-desc">Stress-test data under defined scenarios. Model best-case, base-case, and worst-case outcomes.</div><span class="act-tag">Risk</span></div>
-        <div class="act-card" onclick="openTool('monte-carlo')"><div class="act-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></div><div class="act-title">Monte Carlo Simulation</div><div class="act-desc">Run thousands of simulations to model uncertainty and generate probability distributions.</div><span class="act-tag">Simulation</span></div>
+        <div class="act-card" onclick="openTool('claims-freq')"><div class="act-ic"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="act-title">Claims Frequency & Severity</div><div class="act-desc">Fit frequency distributions and severity models to claims data.</div><span class="act-tag">Insurance</span></div>
+        <div class="act-card" onclick="openTool('loss-ratio')"><div class="act-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="act-title">Loss Ratio Analysis</div><div class="act-desc">Calculate incurred losses to earned premium ratios.</div><span class="act-tag">P&C</span></div>
+        <div class="act-card" onclick="openTool('combined-ratio')"><div class="act-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div><div class="act-title">Combined Ratio</div><div class="act-desc">Track underwriting profitability across periods.</div><span class="act-tag">Underwriting</span></div>
+        <div class="act-card" onclick="openTool('reserving')"><div class="act-ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="act-title">Claims Reserving</div><div class="act-desc">Chain-ladder and Bornhuetter-Ferguson methods for IBNR estimation.</div><span class="act-tag">Reserving</span></div>
+        <div class="act-card" onclick="openTool('scenario')"><div class="act-ic"><svg viewBox="0 0 24 24"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 4v16"/></svg></div><div class="act-title">Scenario Testing</div><div class="act-desc">Stress-test data under best-case, base-case, and worst-case scenarios.</div><span class="act-tag">Risk</span></div>
+        <div class="act-card" onclick="openTool('monte-carlo')"><div class="act-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></div><div class="act-title">Monte Carlo Simulation</div><div class="act-desc">Run thousands of simulations to model uncertainty and risk.</div><span class="act-tag">Simulation</span></div>
       </div>
     </div>
-
     <div class="sb2" id="report-sec">
       <div class="sec-title">Generate Report</div>
       <div class="sec-sub">Export your analysis as a professional report.</div>
       <div class="card">
-        <!-- BACKEND: POST /api/report/generate · /api/report/pdf · /api/report/excel -->
         <div class="rpt-btns">
           <button class="rbt rbt-dark" onclick="genReport()"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Generate Report</button>
-          <button class="rbt rbt-teal" onclick="showToast('PDF export requires backend','warn-t')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export PDF</button>
-          <button class="rbt rbt-green" onclick="showToast('Excel export requires backend','warn-t')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>Export Excel</button>
+          <button class="rbt rbt-orange" onclick="showToast('PDF export coming soon','warn-t')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export PDF</button>
+          <button class="rbt rbt-outline" onclick="showToast('Excel export coming soon','warn-t')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>Export Excel</button>
         </div>
         <div id="rptPrev" style="display:none;margin-top:18px;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:18px">
-          <div style="font-size:15px;font-weight:800;color:var(--text);margin-bottom:3px">StatLens Pro — Analysis Report</div>
+          <div style="font-size:15px;font-weight:800;color:var(--text);margin-bottom:3px">StatLens — Analysis Report</div>
           <div style="font-size:10px;color:var(--muted2);margin-bottom:12px;font-family:'JetBrains Mono',monospace" id="rptDate"></div>
           <div style="font-size:12.5px;color:var(--muted);line-height:1.75;white-space:pre-line" id="rptContent"></div>
         </div>
       </div>
     </div>
-
     <div class="sb2" id="hist-sec">
       <div class="sec-title">Analysis History</div>
       <div class="sec-sub">Your recently analyzed files.</div>
-      <div class="card">
-        <div class="hist-list" id="histList">
-          <div class="empty-h">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            No analysis history yet. Upload a file to get started.
-          </div>
-        </div>
-      </div>
+      <div class="card"><div class="hist-list" id="histList"><div class="empty-h"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>No history yet. Upload a file to get started.</div></div></div>
     </div>
-
   </div>
 </div>
 </div>
-
-<div class="toast" id="toast"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span id="toastMsg"></span></div>
-
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
 <script>
-/* ══════════════════════════════
-   BACKEND URL
-   Replace with your Render URL:
-   https://statlens-pro.onrender.com
-   ══════════════════════════════ */
 var BACKEND = 'https://statlens-pro.onrender.com';
-var S = {file:null,playing:false,prog:0,timer:null,speed:1,hist:[]};
+var S = { file:null, playing:false, prog:0, timer:null, speed:1, hist:[], lastInsights:'', lastFile:'' };
 
-function toggleSB(){document.getElementById('sidebar').classList.toggle('open');}
-document.addEventListener('click',function(e){var sb=document.getElementById('sidebar'),hb=document.getElementById('hbg');if(sb.classList.contains('open')&&!sb.contains(e.target)&&!hb.contains(e.target))sb.classList.remove('open');});
-function goto(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('sidebar').classList.remove('open');}
+function toggleSB(){ document.getElementById('sidebar').classList.toggle('open'); }
+document.addEventListener('click', function(e){ var sb=document.getElementById('sidebar'),hb=document.getElementById('hbg'); if(sb.classList.contains('open')&&!sb.contains(e.target)&&!hb.contains(e.target)) sb.classList.remove('open'); });
+function goto(id){ var el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); document.getElementById('sidebar').classList.remove('open'); }
 
-var fi=document.getElementById('fi'),uz=document.getElementById('uz'),fp=document.getElementById('fp');
-fi.addEventListener('change',function(){if(fi.files&&fi.files[0])setFile(fi.files[0]);});
-uz.addEventListener('dragover',function(e){e.preventDefault();uz.classList.add('over');});
-uz.addEventListener('dragleave',function(){uz.classList.remove('over');});
-uz.addEventListener('drop',function(e){e.preventDefault();uz.classList.remove('over');var f=e.dataTransfer.files[0];if(f)setFile(f);});
-
-function setFile(f){S.file=f;document.getElementById('fp-name').textContent=f.name;document.getElementById('fp-sz').textContent=fmtSz(f.size);fp.style.display='flex';uz.style.display='none';hideSt();}
-function clearFile(){S.file=null;fi.value='';fp.style.display='none';uz.style.display='block';hideSt();}
-function fmtSz(b){return b<1048576?(b/1024).toFixed(1)+' KB':(b/1048576).toFixed(1)+' MB';}
+var fi=document.getElementById('fi'), uz=document.getElementById('uz'), fp=document.getElementById('fp');
+fi.addEventListener('change', function(){ if(fi.files&&fi.files[0]) setFile(fi.files[0]); });
+uz.addEventListener('dragover', function(e){ e.preventDefault(); uz.classList.add('over'); });
+uz.addEventListener('dragleave', function(){ uz.classList.remove('over'); });
+uz.addEventListener('drop', function(e){ e.preventDefault(); uz.classList.remove('over'); var f=e.dataTransfer.files[0]; if(f) setFile(f); });
+function setFile(f){ S.file=f; document.getElementById('fp-name').textContent=f.name; document.getElementById('fp-sz').textContent=fmtSz(f.size); fp.style.display='flex'; uz.style.display='none'; hideSt(); }
+function clearFile(){ S.file=null; fi.value=''; fp.style.display='none'; uz.style.display='block'; hideSt(); }
+function fmtSz(b){ return b<1048576?(b/1024).toFixed(1)+' KB':(b/1048576).toFixed(1)+' MB'; }
 
 function runAnalysis(){
-  if(!S.file){showErr('Please select a file first.');return;}
-  hideSt();setBtnOff(true);showLoad('Uploading file…');startProg();
-  var fd=new FormData();fd.append('file',S.file);
-  /* BACKEND CONNECTION POINT */
+  if(!S.file){ showErr('Please select a file first.'); return; }
+  hideSt(); setBtnOff(true); showLoad('Analyzing your data…'); startProg();
+  var fd=new FormData(); fd.append('file',S.file);
   fetch(BACKEND+'/api/analyze/upload',{method:'POST',body:fd})
-    .then(function(r){if(!r.ok)throw new Error('Server: '+r.status);return r.json();})
-    .then(function(d){if(!d.success)throw new Error(d.message||'Failed');fillResults(d.analysis,S.file.name);})
-    .catch(function(e){if(/fetch|Failed|Network|CORS/i.test(e.message)){fillDemo(S.file.name);}else{showErr(e.message);setBtnOff(false);stopProg();}});
+    .then(function(r){ if(!r.ok) return r.json().then(function(e){ throw new Error(e.message||'Server error '+r.status); }); return r.json(); })
+    .then(function(d){ if(!d.success) throw new Error(d.message||'Failed'); fillResults(d.analysis,S.file.name); })
+    .catch(function(e){ showErr(e.message||'Could not reach server. Try again.'); setBtnOff(false); stopProg(); });
 }
 
-function fillDemo(name){fillResults({insights:'Revenue grew at 3.1% monthly. Dataset quality is high with minimal missing values. Q3 shows a 34% expense spike worth investigating. Profit margins at 63% exceed sector benchmarks.',financials:{rows:1240,cols:8,missing:14,dupes:3,quality:91,mean:42180,median:39500,std:8420,min:12000,max:98700}},name);showToast('Demo results shown — connect backend for real analysis','warn-t');}
-
-function fillResults(analysis,name){
-  stopProg();document.getElementById('pf').style.width='100%';
-  var f=(analysis&&analysis.financials)?analysis.financials:{};
-  var m={rows:f.rows||1240,cols:f.cols||8,missing:f.missing||14,dupes:f.dupes||3,quality:f.quality||91,mean:f.mean||42180,median:f.median||39500,std:f.std||8420,min:f.min||12000,max:f.max||98700};
-  var ins=(analysis&&analysis.insights)||'Analysis complete.';
-  document.getElementById('ov-rows').textContent=m.rows.toLocaleString();
-  document.getElementById('ov-cols').textContent=m.cols;
-  document.getElementById('ov-miss').textContent=m.missing;
-  document.getElementById('ov-qual').textContent=m.quality+'%';
-  document.getElementById('ov-anom').textContent='3';
-  animNum('dq-rows',m.rows);animNum('dq-cols',m.cols);animNum('dq-miss',m.missing);animNum('dq-dupe',m.dupes);
-  document.getElementById('qsFill').style.strokeDashoffset=188-(188*m.quality/100);
-  document.getElementById('qsNum').textContent=m.quality+'%';
-  document.getElementById('qsSub').textContent=m.quality>=85?'Excellent':m.quality>=70?'Good':'Needs work';
-  setV('st-mean',m.mean.toLocaleString());setV('st-med',m.median.toLocaleString());setV('st-std',m.std.toLocaleString());setV('st-min',m.min.toLocaleString());setV('st-max',m.max.toLocaleString());
-  setT('txt-simple',ins);
-  setT('txt-tech','Mean: '+m.mean.toLocaleString()+' · Median: '+m.median.toLocaleString()+' · Std Dev: '+m.std.toLocaleString()+' · Range: '+m.min.toLocaleString()+'–'+m.max.toLocaleString()+'. Distribution approximately normal. No significant multicollinearity detected.');
-  setT('txt-biz','Profitability exceeds sector benchmarks. Strong Q1–Q2 trajectory with mid-year dip. Review August–September operating costs to identify margin compression.');
-  setT('txt-warn','⚠ '+m.missing+' missing values — consider imputation before modeling.\n⚠ '+m.dupes+' duplicate rows found.\n✓ No outliers beyond 3σ.\n✓ Dataset ('+m.rows.toLocaleString()+' rows) sufficient for inference.');
-  document.getElementById('apTrack').textContent=name+' — Ready';
-  document.getElementById('apTx').textContent='Your dataset has '+m.rows.toLocaleString()+' rows across '+m.cols+' columns with a quality score of '+m.quality+'%. '+ins;
-  S.hist.unshift({name:name,quality:m.quality,date:new Date().toLocaleDateString()});renderHist();
-  hideSt();setBtnOff(false);
-  setTimeout(function(){document.getElementById('pw').style.display='none';document.getElementById('pf').style.width='0%';},900);
-  showToast('Analysis complete','ok-t');goto('quality-sec');
+function fillResults(analysis, name){
+  stopProg(); document.getElementById('pf').style.width='100%';
+  var f=analysis.financials||{};
+  document.getElementById('ov-rows').textContent=(f.rows||0).toLocaleString();
+  document.getElementById('ov-cols').textContent=f.cols||0;
+  document.getElementById('ov-miss').textContent=f.missing||0;
+  document.getElementById('ov-qual').textContent=(f.quality||0)+'%';
+  document.getElementById('ov-anom').textContent=analysis.anomalies||0;
+  animNum('dq-rows',f.rows||0); animNum('dq-cols',f.cols||0); animNum('dq-miss',f.missing||0); animNum('dq-dupe',f.dupes||0);
+  document.getElementById('qsFill').style.strokeDashoffset=188-(188*(f.quality||0)/100);
+  document.getElementById('qsNum').textContent=(f.quality||0)+'%';
+  document.getElementById('qsSub').textContent=(f.quality||0)>=85?'Excellent':(f.quality||0)>=70?'Good':'Needs work';
+  setV('st-mean',(f.mean||0).toLocaleString()); setV('st-med',(f.median||0).toLocaleString()); setV('st-std',(f.std||0).toLocaleString()); setV('st-min',(f.min||0).toLocaleString()); setV('st-max',(f.max||0).toLocaleString());
+  var ins=analysis.insights||'Analysis complete.';
+  S.lastInsights=ins; S.lastFile=name;
+  setTab('txt-simple',ins);
+  setTab('txt-tech','Rows: '+(f.rows||0)+' | Cols: '+(f.cols||0)+' | Mean: '+(f.mean||0).toLocaleString()+' | Median: '+(f.median||0).toLocaleString()+' | Std Dev: '+(f.std||0).toLocaleString()+' | Min: '+(f.min||0).toLocaleString()+' | Max: '+(f.max||0).toLocaleString()+'. Anomalies detected: '+(analysis.anomalies||0)+'. Quality score: '+(f.quality||0)+'%.');
+  setTab('txt-biz','Total profit: $'+(f.profit||0).toLocaleString()+'. Total expenses: $'+(f.expenses||0).toLocaleString()+'. Loss periods: $'+(f.loss||0).toLocaleString()+'. Review loss months and expense spikes to improve profitability.');
+  setTab('txt-warn',(f.missing||0)+' missing values detected. '+(f.dupes||0)+' duplicate rows found. '+(analysis.anomalies||0)+' statistical anomalies flagged. Quality score: '+(f.quality||0)+'%.');
+  if(analysis.chartData&&analysis.chartData.length>0) buildCharts(analysis.chartData);
+  document.getElementById('apTrack').textContent=name+' — Ready to play';
+  document.getElementById('apTx').textContent='Your dataset '+name+' contains '+(f.rows||0)+' records across '+(f.cols||0)+' columns. '+ins;
+  document.getElementById('pgSub').textContent='Analyzed: '+name;
+  document.getElementById('phNote').style.display='none';
+  S.hist.unshift({name:name,quality:f.quality||0,date:new Date().toLocaleDateString()});
+  renderHist();
+  hideSt(); setBtnOff(false);
+  setTimeout(function(){ document.getElementById('pw').style.display='none'; document.getElementById('pf').style.width='0%'; },900);
+  showToast('Analysis complete!','ok-t');
+  goto('quality-sec');
 }
 
-function animNum(id,target){var el=document.getElementById(id);el.classList.remove('ph');var s=0,step=target/28,t=setInterval(function(){s+=step;if(s>=target){s=target;clearInterval(t);}el.textContent=Math.round(s).toLocaleString();},32);}
-function setV(id,v){var el=document.getElementById(id);el.classList.remove('ph');el.textContent=v;}
-function setT(id,txt){var el=document.getElementById(id);el.classList.remove('ph');el.textContent=txt;}
-
-var progT;
-function startProg(){var p=document.getElementById('pf'),w=document.getElementById('pw');w.style.display='block';p.style.width='0%';var v=0;progT=setInterval(function(){v+=Math.random()*7;if(v>84)v=84;p.style.width=v+'%';},280);}
-function stopProg(){clearInterval(progT);}
-function setBtnOff(v){document.getElementById('runBtn').disabled=v;}
-function showLoad(m){document.getElementById('stLoad').style.display='flex';document.getElementById('stTxt').textContent=m;document.getElementById('stErr').style.display='none';}
-function showErr(m){document.getElementById('stErr').textContent=m;document.getElementById('stErr').style.display='block';document.getElementById('stLoad').style.display='none';}
-function hideSt(){document.getElementById('stLoad').style.display='none';document.getElementById('stErr').style.display='none';}
-
-function swTab(name,btn){document.querySelectorAll('.tp').forEach(function(p){p.classList.remove('active');});document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});document.getElementById('tp-'+name).classList.add('active');btn.classList.add('active');}
-
-function setQ(el){document.getElementById('askTA').value=el.textContent;}
-function sendQ(){
-  var q=document.getElementById('askTA').value.trim();if(!q)return;
-  var r=document.getElementById('ask-resp'),rt=document.getElementById('ask-resp-txt');
-  rt.textContent='Thinking…';r.style.display='block';
-  /* BACKEND: POST /api/ask */
-  fetch(BACKEND+'/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})})
-    .then(function(x){return x.json();})
-    .then(function(d){rt.textContent=d.answer||'No answer returned.';})
-    .catch(function(){rt.textContent='Demo mode: Connect backend to get real AI answers to "'+q+'"';});
-}
-
-function togglePlay(){
-  S.playing=!S.playing;
-  var ic=document.getElementById('apIcon');
-  if(S.playing){
-    ic.outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-    S.timer=setInterval(function(){S.prog+=(100/90)*S.speed;if(S.prog>=100){S.prog=0;S.playing=false;clearInterval(S.timer);document.getElementById('apIcon').outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>';}document.getElementById('apProg').style.width=S.prog+'%';var e=Math.floor((S.prog/100)*90);document.getElementById('apTime').textContent=Math.floor(e/60)+':'+String(e%60).padStart(2,'0')+' / 1:30';},1000);
-  }else{
-    ic.outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-    clearInterval(S.timer);
+function buildCharts(chartData){
+  for(var i=0;i<3;i++){
+    var col=chartData[i];
+    var el=document.getElementById('chart'+(i+1));
+    if(!col||!el) continue;
+    var maxVal=Math.max.apply(null,col.values);
+    var colors=['#ea6c1e','#ff8c42','#c85a10'];
+    el.innerHTML='<div class="chart-bars" id="cb'+(i+1)+'"></div>';
+    var bars=document.getElementById('cb'+(i+1));
+    col.values.forEach(function(v,j){
+      var wrap=document.createElement('div'); wrap.className='cbar-wrap';
+      var bar=document.createElement('div'); bar.className='cbar';
+      bar.style.background=colors[i]; bar.style.height='0px';
+      var lbl=document.createElement('div'); lbl.className='cbar-lbl'; lbl.textContent=j+1;
+      wrap.appendChild(bar); wrap.appendChild(lbl); bars.appendChild(wrap);
+      setTimeout(function(b,h){ return function(){ b.style.height=Math.round((h/maxVal)*110)+'px'; }; }(bar,v), 100+j*40);
+    });
+    el.parentElement.querySelector('.chart-title').textContent=col.name;
   }
 }
-function setSpd(s,btn){S.speed=s;document.querySelectorAll('.ap-spd').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');}
 
+function animNum(id,target){ var el=document.getElementById(id); el.classList.remove('ph'); var s=0,step=target/28,t=setInterval(function(){ s+=step; if(s>=target){s=target;clearInterval(t);} el.textContent=Math.round(s).toLocaleString(); },32); }
+function setV(id,v){ var el=document.getElementById(id); el.classList.remove('ph'); el.textContent=v; }
+function setTab(id,txt){ var el=document.getElementById(id); el.classList.remove('ph'); el.textContent=txt; }
+var progT;
+function startProg(){ var p=document.getElementById('pf'),w=document.getElementById('pw'); w.style.display='block'; p.style.width='0%'; var v=0; progT=setInterval(function(){ v+=Math.random()*7; if(v>84)v=84; p.style.width=v+'%'; },280); }
+function stopProg(){ clearInterval(progT); }
+function setBtnOff(v){ document.getElementById('runBtn').disabled=v; }
+function showLoad(m){ document.getElementById('stLoad').style.display='flex'; document.getElementById('stTxt').textContent=m; document.getElementById('stErr').style.display='none'; }
+function showErr(m){ document.getElementById('stErr').textContent=m; document.getElementById('stErr').style.display='block'; document.getElementById('stLoad').style.display='none'; }
+function hideSt(){ document.getElementById('stLoad').style.display='none'; document.getElementById('stErr').style.display='none'; }
+function swTab(name,btn){ document.querySelectorAll('.tp').forEach(function(p){p.classList.remove('active');}); document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');}); document.getElementById('tp-'+name).classList.add('active'); btn.classList.add('active'); }
+function setQ(el){ document.getElementById('askTA').value=el.textContent; }
+function sendQ(){
+  var q=document.getElementById('askTA').value.trim(); if(!q) return;
+  var r=document.getElementById('askResp'); r.textContent='Thinking…'; r.style.display='block';
+  fetch(BACKEND+'/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})})
+    .then(function(x){return x.json();})
+    .then(function(d){ r.textContent=d.answer||'No answer returned.'; })
+    .catch(function(){ r.textContent='Could not reach server. Check your connection.'; });
+}
+function togglePlay(){
+  if(!S.lastInsights){ showToast('Run analysis first','warn-t'); return; }
+  if(window.speechSynthesis){
+    if(S.playing){ window.speechSynthesis.cancel(); S.playing=false; document.getElementById('apIcon').outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; clearInterval(S.timer); return; }
+    var utt=new SpeechSynthesisUtterance(S.lastInsights); utt.rate=S.speed;
+    utt.onend=function(){ S.playing=false; S.prog=0; document.getElementById('apProg').style.width='0%'; document.getElementById('apIcon').outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; clearInterval(S.timer); };
+    window.speechSynthesis.speak(utt); S.playing=true;
+    document.getElementById('apIcon').outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+    document.getElementById('apTrack').textContent='Playing: '+S.lastFile;
+    var dur=S.lastInsights.split(' ').length/2.5;
+    S.prog=0; S.timer=setInterval(function(){ S.prog+=(100/dur/10)*S.speed; if(S.prog>=100)S.prog=100; document.getElementById('apProg').style.width=S.prog+'%'; var e=Math.floor((S.prog/100)*dur); document.getElementById('apTime').textContent=Math.floor(e/60)+':'+String(Math.floor(e%60)).padStart(2,'0')+' / '+Math.floor(dur/60)+':'+String(Math.floor(dur%60)).padStart(2,'0'); },100);
+  } else { showToast('Audio not supported in this browser','warn-t'); }
+}
+function setSpd(s,btn){ S.speed=s; if(window.speechSynthesis) window.speechSynthesis.rate=s; document.querySelectorAll('.ap-spd').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); }
+function simplifyExplanation(){ if(!S.lastInsights){ showToast('Run analysis first','warn-t'); return; } var el=document.getElementById('txt-simple'); el.textContent='In simple terms: your data looks '+( parseInt(document.getElementById('ov-qual').textContent)>=85?'great':'okay')+'. You have '+ document.getElementById('ov-rows').textContent+' records. '+S.lastInsights.split('.')[0]+'.'; goto('results-sec'); }
+function explainChart(){ if(!S.lastInsights){ showToast('Run analysis first','warn-t'); return; } showToast('Chart shows your top numeric columns as bar charts','ok-t'); goto('charts-sec'); }
 var toolNames={'claims-freq':'Claims Frequency & Severity','loss-ratio':'Loss Ratio Analysis','combined-ratio':'Combined Ratio','reserving':'Claims Reserving','scenario':'Scenario Testing','monte-carlo':'Monte Carlo Simulation'};
-function openTool(t){showToast(toolNames[t]+' — connect backend to run','warn-t');}
-
+function openTool(t){ showToast(toolNames[t]+' — coming soon','warn-t'); }
 function genReport(){
+  if(!S.lastFile){ showToast('Run analysis first','warn-t'); return; }
   document.getElementById('rptDate').textContent='Generated: '+new Date().toLocaleString();
-  document.getElementById('rptContent').textContent='StatLens Pro Analysis Report\n\nFile: '+(S.file?S.file.name:'No file uploaded')+'\n\nThis is a demo report. Connect the StatLens Pro backend to generate a full report with statistics, anomaly detection, AI insights, charts, and actuarial calculations.\n\nBackend: '+BACKEND+'/api/report/generate';
-  var p=document.getElementById('rptPrev');p.style.display='block';p.scrollIntoView({behavior:'smooth'});
+  document.getElementById('rptContent').textContent='StatLens Analysis Report\n\nFile: '+S.lastFile+'\nDate: '+new Date().toLocaleDateString()+'\n\nSummary:\n'+S.lastInsights+'\n\nStatistics:\nMean: '+document.getElementById('st-mean').textContent+'\nMedian: '+document.getElementById('st-med').textContent+'\nStd Dev: '+document.getElementById('st-std').textContent+'\nMin: '+document.getElementById('st-min').textContent+'\nMax: '+document.getElementById('st-max').textContent+'\n\nData Quality: '+document.getElementById('ov-qual').textContent;
+  var p=document.getElementById('rptPrev'); p.style.display='block'; p.scrollIntoView({behavior:'smooth'});
 }
-
-function renderHist(){
-  var el=document.getElementById('histList');
-  if(!S.hist.length)return;
-  el.innerHTML=S.hist.map(function(h){var ext=h.name.split('.').pop().toLowerCase();var ic=ext==='pdf'?'hi-pdf':ext==='csv'?'hi-csv':'hi-xlsx';var em=ext==='pdf'?'📄':ext==='csv'?'📊':'📗';var sc=h.quality>=85?'hi-good':'hi-mid';return '<div class="hist-item"><div class="hi-ic '+ic+'">'+em+'</div><div class="hi-info"><div class="hi-nm">'+h.name+'</div><div class="hi-mt">'+h.date+'</div></div><span class="hi-sc '+sc+'">'+h.quality+'%</span></div>';}).join('');
-}
-
-function buildCharts(){buildBars('trend-bars',[52,65,70,60,78,84,69,88],false);buildBars('dist-bars',[18,40,78,100,82,58,32,13],true);buildBars('cat-bars',[38,62,52,76,68,44,58,72],false,true);}
-function buildBars(id,hs,t,g){var el=document.getElementById(id);if(!el)return;el.innerHTML='';hs.forEach(function(h,i){var b=document.createElement('div');b.className='chb'+(t?' t':g?' g':'');b.style.height='0px';el.appendChild(b);setTimeout(function(){b.style.height=h+'px';},250+i*50);});}
-
-function showToast(msg,type){var t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;t.className='toast '+(type||'ok-t')+' show';clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},3500);}
-
-window.addEventListener('load',function(){buildCharts();renderHist();});
+function renderHist(){ var el=document.getElementById('histList'); if(!S.hist.length) return; el.innerHTML=S.hist.map(function(h){ return '<div class="hist-item"><div class="hi-ic">📊</div><div class="hi-info"><div class="hi-nm">'+h.name+'</div><div class="hi-mt">'+h.date+'</div></div><span class="hi-sc">'+h.quality+'%</span></div>'; }).join(''); }
+function showToast(msg,type){ var t=document.getElementById('toast'); document.getElementById('toastMsg').textContent=msg; t.className='toast '+(type||'ok-t')+' show'; clearTimeout(t._t); t._t=setTimeout(function(){ t.classList.remove('show'); },3500); }
+window.addEventListener('load', function(){ renderHist(); });
 </script>
 </body>
 </html>
