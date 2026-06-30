@@ -27,13 +27,13 @@ function parseCSV(text) {
   return { headers, rows };
 }
 
-function getNumericValues(rows, headers) {
-  const numericCols = [];
+function getNumericCols(rows, headers) {
+  const cols = [];
   headers.forEach(h => {
     const vals = rows.map(r => parseFloat(r[h])).filter(v => !isNaN(v));
-    if (vals.length > rows.length * 0.5) numericCols.push({ name: h, values: vals });
+    if (vals.length > rows.length * 0.5) cols.push({ name: h, values: vals });
   });
-  return numericCols;
+  return cols;
 }
 
 function calcStats(values) {
@@ -43,118 +43,99 @@ function calcStats(values) {
     ? (sorted[sorted.length/2 - 1] + sorted[sorted.length/2]) / 2
     : sorted[Math.floor(sorted.length/2)];
   const variance = values.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / values.length;
-  const std = Math.sqrt(variance);
   return {
     mean: Math.round(mean),
     median: Math.round(median),
-    std: Math.round(std),
+    std: Math.round(Math.sqrt(variance)),
     min: Math.round(sorted[0]),
     max: Math.round(sorted[sorted.length - 1])
   };
 }
 
 function countMissing(rows, headers) {
-  let missing = 0;
-  rows.forEach(row => {
-    headers.forEach(h => { if (!row[h] || row[h] === '') missing++; });
-  });
-  return missing;
+  let m = 0;
+  rows.forEach(row => { headers.forEach(h => { if (!row[h] || row[h] === '') m++; }); });
+  return m;
 }
 
 function countDupes(rows) {
-  const seen = new Set();
-  let dupes = 0;
-  rows.forEach(row => {
-    const key = JSON.stringify(row);
-    if (seen.has(key)) dupes++;
-    else seen.add(key);
+  const seen = new Set(); let d = 0;
+  rows.forEach(row => { const k = JSON.stringify(row); if (seen.has(k)) d++; else seen.add(k); });
+  return d;
+}
+
+function detectAnomalies(cols) {
+  const anomalies = [];
+  cols.forEach(col => {
+    const mean = col.values.reduce((a, b) => a + b, 0) / col.values.length;
+    const std = Math.sqrt(col.values.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / col.values.length);
+    col.values.forEach((v, i) => {
+      if (Math.abs(v - mean) > 2 * std) anomalies.push({ col: col.name, index: i + 1, value: v });
+    });
   });
-  return dupes;
+  return anomalies;
 }
 
 app.post('/api/analyze/upload', upload.single('file'), async (req, res) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ success: false, message: 'No file uploaded' });
-    }
+    if (!req.file) return res.status(400).json({ success: false, message: 'No file uploaded' });
 
     const file = req.file;
     const mimeType = file.mimetype;
     const fileName = file.originalname;
 
     if (mimeType === 'text/csv' || fileName.endsWith('.csv')) {
-      const textContent = file.buffer.toString('utf-8');
-      const parsed = parseCSV(textContent);
-
-      if (!parsed) {
-        return res.json({ success: true, analysis: { insights: 'Could not parse CSV file. Please check the format.', financials: { rows: 0, cols: 0, missing: 0, dupes: 0, quality: 0, mean: 0, median: 0, std: 0, min: 0, max: 0, profit: 0, loss: 0, expenses: 0 } } });
-      }
+      const text = file.buffer.toString('utf-8');
+      const parsed = parseCSV(text);
+      if (!parsed) return res.json({ success: true, analysis: { insights: 'Could not parse CSV. Check format.', financials: { rows:0,cols:0,missing:0,dupes:0,quality:0,mean:0,median:0,std:0,min:0,max:0,profit:0,loss:0,expenses:0 }, chartData: [] } });
 
       const { headers, rows } = parsed;
-      const numericCols = getNumericValues(rows, headers);
-      const missing = countMissing(rows, parsed.headers);
+      const numCols = getNumericCols(rows, headers);
+      const missing = countMissing(rows, headers);
       const dupes = countDupes(rows);
-      const quality = Math.round(100 - (missing / (rows.length * headers.length) * 100) - (dupes / rows.length * 10));
+      const anomalies = detectAnomalies(numCols);
+      const quality = Math.max(0, Math.min(100, Math.round(100 - (missing / (rows.length * headers.length) * 100) - (dupes / rows.length * 10))));
 
-      let stats = { mean: 0, median: 0, std: 0, min: 0, max: 0 };
-      let profit = 0, loss = 0, expenses = 0;
+      let stats = { mean:0, median:0, std:0, min:0, max:0 };
+      if (numCols.length > 0) stats = calcStats(numCols[0].values);
 
-      if (numericCols.length > 0) {
-        const mainCol = numericCols[0];
-        stats = calcStats(mainCol.values);
-      }
+      const find = (keyword) => numCols.find(c => c.name.toLowerCase().includes(keyword));
+      const sum = (col) => col ? Math.round(col.values.reduce((a,b) => a+b, 0)) : 0;
 
-      const profitCol = numericCols.find(c => c.name.toLowerCase().includes('profit'));
-      const lossCol = numericCols.find(c => c.name.toLowerCase().includes('loss'));
-      const expCol = numericCols.find(c => c.name.toLowerCase().includes('expense'));
-      const revCol = numericCols.find(c => c.name.toLowerCase().includes('revenue'));
+      const revCol = find('revenue') || find('sales') || find('income');
+      const profitCol = find('profit');
+      const lossCol = find('loss');
+      const expCol = find('expense');
 
-      if (profitCol) profit = profitCol.values.reduce((a, b) => a + b, 0);
-      if (lossCol) loss = lossCol.values.reduce((a, b) => a + b, 0);
-      if (expCol) expenses = expCol.values.reduce((a, b) => a + b, 0);
+      const totalRev = sum(revCol);
+      const totalProfit = sum(profitCol);
+      const totalLoss = sum(lossCol);
+      const totalExp = sum(expCol);
+      const avgRev = revCol ? Math.round(totalRev / revCol.values.length) : 0;
 
-      const totalRevenue = revCol ? revCol.values.reduce((a, b) => a + b, 0) : 0;
-      const avgRevenue = revCol ? Math.round(totalRevenue / revCol.values.length) : 0;
+      let insights = 'Dataset: ' + rows.length + ' records, ' + headers.length + ' columns. ';
+      if (totalRev > 0) insights += 'Total revenue $' + totalRev.toLocaleString() + ', monthly average $' + avgRev.toLocaleString() + '. ';
+      if (totalProfit > 0) insights += 'Total profit $' + totalProfit.toLocaleString() + '. ';
+      if (totalLoss > 0) insights += 'Loss periods detected totalling $' + totalLoss.toLocaleString() + ' — review these months. ';
+      if (totalExp > 0) insights += 'Total expenses $' + totalExp.toLocaleString() + '. ';
+      if (anomalies.length > 0) insights += anomalies.length + ' statistical anomalies detected. ';
+      if (missing > 0) insights += missing + ' missing values. ';
+      insights += 'Quality score ' + quality + '%.';
 
-      let insights = 'Dataset contains ' + rows.length + ' records across ' + headers.length + ' columns. ';
-      if (totalRevenue > 0) insights += 'Total revenue: $' + totalRevenue.toLocaleString() + ' with monthly average of $' + avgRevenue.toLocaleString() + '. ';
-      if (profit > 0) insights += 'Total profit: $' + Math.round(profit).toLocaleString() + '. ';
-      if (loss > 0) insights += 'Total loss: $' + Math.round(loss).toLocaleString() + ' — investigate loss periods. ';
-      if (expenses > 0) insights += 'Total expenses: $' + Math.round(expenses).toLocaleString() + '. ';
-      if (missing > 0) insights += missing + ' missing values detected. ';
-      if (dupes > 0) insights += dupes + ' duplicate rows found. ';
-      insights += 'Data quality score: ' + quality + '%.';
+      const chartData = numCols.slice(0, 4).map(c => ({ name: c.name, values: c.values }));
 
       return res.json({
         success: true,
         analysis: {
           insights,
-          financials: {
-            rows: rows.length,
-            cols: headers.length,
-            missing,
-            dupes,
-            quality: Math.max(0, Math.min(100, quality)),
-            mean: stats.mean,
-            median: stats.median,
-            std: stats.std,
-            min: stats.min,
-            max: stats.max,
-            profit: Math.round(profit),
-            loss: Math.round(loss),
-            expenses: Math.round(expenses)
-          }
+          anomalies: anomalies.length,
+          chartData,
+          financials: { rows:rows.length, cols:headers.length, missing, dupes, quality, mean:stats.mean, median:stats.median, std:stats.std, min:stats.min, max:stats.max, profit:totalProfit, loss:totalLoss, expenses:totalExp }
         }
       });
 
     } else {
-      return res.json({
-        success: true,
-        analysis: {
-          insights: 'File received: ' + fileName + '. CSV files provide the most detailed analysis. Please upload a CSV for full statistical breakdown.',
-          financials: { rows: 0, cols: 0, missing: 0, dupes: 0, quality: 85, mean: 0, median: 0, std: 0, min: 0, max: 0, profit: 0, loss: 0, expenses: 0 }
-        }
-      });
+      return res.json({ success: true, analysis: { insights: 'File ' + fileName + ' received. Upload a CSV for full statistical analysis.', anomalies: 0, chartData: [], financials: { rows:0,cols:0,missing:0,dupes:0,quality:85,mean:0,median:0,std:0,min:0,max:0,profit:0,loss:0,expenses:0 } } });
     }
 
   } catch (err) {
@@ -167,7 +148,17 @@ app.post('/api/ask', async (req, res) => {
   try {
     const { question } = req.body;
     if (!question) return res.status(400).json({ success: false, message: 'No question provided' });
-    return res.json({ success: true, answer: 'You asked: "' + question + '". Connect the Anthropic API to get real AI-powered answers about your data.' });
+    const q = question.toLowerCase();
+    let answer = '';
+    if (q.includes('revenue') || q.includes('sales')) answer = 'Revenue analysis requires your uploaded data. Upload a CSV with a revenue column to see totals, trends and monthly breakdowns.';
+    else if (q.includes('profit')) answer = 'Profit is calculated as revenue minus expenses. Upload your financial CSV to see your exact profit margins and trends.';
+    else if (q.includes('anomaly') || q.includes('outlier')) answer = 'StatLens detects anomalies using 2-standard-deviation analysis. Any value more than 2x the standard deviation from the mean is flagged.';
+    else if (q.includes('trend')) answer = 'Trend analysis compares values across time periods. Upload a CSV with date and value columns to see your trend chart.';
+    else if (q.includes('quality')) answer = 'Data quality score is calculated based on missing values, duplicate rows, and data completeness across all columns.';
+    else if (q.includes('mean') || q.includes('average')) answer = 'The mean is the arithmetic average of all values in a column. StatLens calculates this automatically from your uploaded CSV.';
+    else if (q.includes('median')) answer = 'The median is the middle value when all data points are sorted. It is more robust than the mean when outliers are present.';
+    else answer = 'Upload a CSV file and run analysis to get specific answers about your data. StatLens will analyze your exact numbers and provide detailed insights.';
+    return res.json({ success: true, answer });
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message });
   }
