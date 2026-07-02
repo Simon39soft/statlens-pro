@@ -7,49 +7,45 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-:root{--bg:#fff8f4;--bg2:#ffffff;--bg3:#fff1e8;--orange:#ea6c1e;--orange2:#c85a10;--orange3:#ff8c42;--dark:#1a0a00;--dark2:#2d1200;--text:#1a0a00;--muted:#7a5a3a;--muted2:#b08060;--border:#f0d5c0;--border2:#e0b898;--ok:#16a34a;--warn:#d97706;--err:#dc2626;--r:10px;--rl:16px}
+:root{--bg:#fff8f4;--bg2:#ffffff;--bg3:#fff1e8;--orange:#ea6c1e;--orange2:#c85a10;--orange3:#ff8c42;--dark:#1a0a00;--text:#1a0a00;--muted:#7a5a3a;--muted2:#b08060;--border:#f0d5c0;--border2:#e0b898;--ok:#16a34a;--warn:#d97706;--err:#dc2626;--r:10px;--rl:16px}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
-.app{display:flex;min-height:100vh}
-.sidebar{width:230px;background:var(--dark);position:fixed;top:0;left:0;bottom:0;z-index:200;display:flex;flex-direction:column;transition:transform .3s}
-.main{margin-left:230px;flex:1;display:flex;flex-direction:column}
-.topbar{height:58px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:100;gap:12px}
-.content{padding:24px;max-width:1320px;width:100%}
-/* AUTH OVERLAY */
-.auth-overlay{position:fixed;inset:0;background:rgba(26,10,0,0.85);z-index:1000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-.auth-box{background:var(--bg2);border-radius:20px;padding:40px;width:100%;max-width:400px;margin:16px}
-.auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px;justify-content:center}
-.auth-mark{width:36px;height:36px;background:var(--orange);border-radius:9px;display:flex;align-items:center;justify-content:center}
-.auth-mark svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
-.auth-name{font-size:20px;font-weight:800;color:var(--dark)}
-.auth-name span{color:var(--orange)}
-.auth-title{font-size:22px;font-weight:800;color:var(--dark);margin-bottom:6px;text-align:center}
-.auth-sub{font-size:13px;color:var(--muted);margin-bottom:24px;text-align:center}
+
+/* AUTH */
+.auth-screen{position:fixed;inset:0;background:var(--dark);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.auth-box{background:#fff;border-radius:20px;padding:40px;width:100%;max-width:420px;text-align:center}
+.auth-logo{width:48px;height:48px;background:var(--orange);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.auth-logo svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
+.auth-title{font-size:22px;font-weight:800;color:var(--dark);margin-bottom:6px}
+.auth-sub{font-size:13px;color:var(--muted);margin-bottom:28px}
 .auth-tabs{display:flex;gap:2px;background:var(--bg3);border-radius:8px;padding:3px;margin-bottom:24px}
-.auth-tab{flex:1;padding:8px;border-radius:6px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;transition:all .17s;text-align:center}
-.auth-tab.active{background:var(--bg2);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.08)}
-.auth-field{margin-bottom:16px}
-.auth-label{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;display:block}
-.auth-input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:11px 14px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);outline:none;transition:border-color .2s}
+.auth-tab{flex:1;padding:8px;border-radius:6px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;transition:all .17s}
+.auth-tab.active{background:#fff;color:var(--dark);box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+.auth-form{display:flex;flex-direction:column;gap:12px;text-align:left}
+.auth-input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;background:var(--bg)}
 .auth-input:focus{border-color:var(--orange)}
-.auth-btn{width:100%;background:var(--orange);color:#fff;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:8px}
+.auth-btn{width:100%;background:var(--orange);color:#fff;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:4px}
 .auth-btn:hover{background:var(--orange2)}
-.auth-err{background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.2);color:var(--err);border-radius:8px;padding:10px 14px;font-size:12px;margin-bottom:14px;display:none}
-.auth-switch{text-align:center;font-size:12px;color:var(--muted);margin-top:16px}
-.auth-switch a{color:var(--orange);cursor:pointer;font-weight:600}
-/* SIDEBAR */
+.auth-label{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:2px}
+.auth-err{color:var(--err);font-size:12px;text-align:center;display:none}
+.auth-switch{font-size:12px;color:var(--muted);margin-top:16px}
+.auth-switch span{color:var(--orange);cursor:pointer;font-weight:600}
+.user-avatar{width:32px;height:32px;border-radius:50%;background:var(--orange);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer}
+
+/* LAYOUT */
+.app{display:flex;min-height:100vh}
+.sidebar{width:232px;background:var(--dark);position:fixed;top:0;left:0;bottom:0;z-index:200;display:flex;flex-direction:column;transition:transform .3s}
+.main{margin-left:232px;flex:1;display:flex;flex-direction:column}
+.topbar{height:58px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:100}
+.content{padding:24px;max-width:1360px;width:100%}
 .sb-logo{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,0.08)}
 .sb-logo-wrap{display:flex;align-items:center;gap:10px}
 .sb-mark{width:32px;height:32px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sb-mark svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
 .sb-name{font-size:14px;font-weight:800;color:#fff}.sb-name span{color:var(--orange3)}
 .sb-tag{font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase}
-.sb-user{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:10px}
-.sb-avatar{width:30px;height:30px;background:var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
-.sb-uname{font-size:12px;font-weight:600;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sb-uemail{font-size:10px;color:rgba(255,255,255,0.35);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sb-nav{padding:12px 10px;flex:1;overflow-y:auto}
 .sb-sec{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);padding:0 8px;margin:14px 0 5px}
 .sb-sec:first-child{margin-top:0}
@@ -59,10 +55,11 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .sbi svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 .sb-badge{margin-left:auto;background:var(--orange);color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:100px}
 .sb-bottom{padding:10px;border-top:1px solid rgba(255,255,255,0.06)}
-.sb-logout{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);border-radius:8px;padding:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .17s;display:flex;align-items:center;justify-content:center;gap:6px}
-.sb-logout:hover{background:rgba(220,38,38,0.15);color:#f87171;border-color:rgba(220,38,38,0.2)}
-.sb-logout svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
-/* TOPBAR */
+.sb-user{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.05)}
+.sb-user-name{font-size:12px;font-weight:600;color:#fff;flex:1}
+.sb-user-email{font-size:10px;color:rgba(255,255,255,0.35)}
+.sb-logout{background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:10px;font-family:'Inter',sans-serif}
+.sb-logout:hover{color:#fff}
 .topbar-left{display:flex;align-items:center;gap:10px}
 .pg-title{font-size:14px;font-weight:700;color:var(--text)}
 .pg-sub{font-size:11px;color:var(--muted)}
@@ -75,17 +72,17 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .tbtn-primary:hover{background:var(--orange2)}
 .hbg{display:none;background:none;border:none;cursor:pointer;padding:2px}
 .hbg svg{width:20px;height:20px;stroke:var(--text);fill:none;stroke-width:2;stroke-linecap:round}
-/* CARDS */
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:20px}
 .sec-title{font-size:17px;font-weight:800;color:var(--text);margin-bottom:3px;letter-spacing:-0.3px}
 .sec-sub{font-size:12.5px;color:var(--muted);margin-bottom:16px}
 .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.sb2{margin-bottom:28px}
+.sb2{margin-bottom:24px}
+
 /* UPLOAD */
 .upload-zone{border:2px dashed var(--border2);border-radius:var(--rl);padding:44px 24px;text-align:center;cursor:pointer;transition:all .25s;position:relative;background:linear-gradient(135deg,rgba(234,108,30,0.02),rgba(255,140,66,0.02))}
 .upload-zone:hover,.upload-zone.over{border-color:var(--orange);background:rgba(234,108,30,0.04)}
 .upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.uz-ic{width:52px;height:52px;background:linear-gradient(135deg,rgba(234,108,30,0.12),rgba(255,140,66,0.08));border:1px solid rgba(234,108,30,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 13px}
+.uz-ic{width:52px;height:52px;background:rgba(234,108,30,0.1);border:1px solid rgba(234,108,30,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 13px}
 .uz-ic svg{width:22px;height:22px;stroke:var(--orange);fill:none;stroke-width:1.8;stroke-linecap:round}
 .uz-t{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
 .uz-s{font-size:12px;color:var(--muted2);line-height:1.6}
@@ -100,7 +97,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .run-btn{width:100%;background:var(--orange);color:#fff;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:14px;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px}
 .run-btn svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round}
 .run-btn:hover:not(:disabled){background:var(--orange2);transform:translateY(-1px);box-shadow:0 8px 22px rgba(234,108,30,0.3)}
-.run-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none}
+.run-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
 .st-bar{display:none;margin-top:10px;padding:10px 13px;border-radius:8px;font-size:12px;align-items:center;gap:9px}
 .st-load{display:flex;background:rgba(234,108,30,0.06);border:1px solid rgba(234,108,30,0.18);color:var(--orange)}
 .st-err{display:block;background:rgba(220,38,38,0.05);border:1px solid rgba(220,38,38,0.14);color:var(--err)}
@@ -108,6 +105,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 @keyframes spin{to{transform:rotate(360deg)}}
 .prog-wrap{height:3px;background:var(--bg3);border-radius:2px;margin-top:7px;overflow:hidden;display:none}
 .prog-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--orange3));width:0%;border-radius:2px;transition:width .35s}
+
 /* OVERVIEW BAR */
 .ov-bar{background:var(--dark);border-radius:var(--rl);padding:18px 22px;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;position:relative;overflow:hidden;margin-bottom:22px}
 .ov-bar::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(234,108,30,0.18),rgba(255,140,66,0.08));pointer-events:none}
@@ -115,6 +113,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .ov-stat:not(:last-child)::after{content:'';position:absolute;right:0;top:15%;bottom:15%;width:1px;background:rgba(255,255,255,0.07)}
 .ov-num{font-size:20px;font-weight:800;color:#fff;font-family:'JetBrains Mono',monospace;letter-spacing:-0.5px}
 .ov-lbl{font-size:9px;color:rgba(255,255,255,0.38);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+
 /* METRIC CARDS */
 .mc{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:15px;transition:all .18s;position:relative;overflow:hidden}
 .mc:hover{border-color:var(--border2);box-shadow:0 2px 10px rgba(234,108,30,0.08)}
@@ -130,49 +129,58 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .ic-g{background:rgba(22,163,74,0.1);color:var(--ok)}
 .ic-w{background:rgba(217,119,6,0.1);color:var(--warn)}
 .ic-r{background:rgba(220,38,38,0.09);color:var(--err)}
-/* QUALITY RING */
 .qs-wrap{text-align:center}
-.qs-ring{width:76px;height:76px;position:relative;margin:0 auto 10px}
-.qs-svg{width:76px;height:76px;transform:rotate(-90deg)}
-.qs-bg{fill:none;stroke:var(--bg3);stroke-width:5.5}
-.qs-fill{fill:none;stroke:var(--orange);stroke-width:5.5;stroke-linecap:round;stroke-dasharray:188;stroke-dashoffset:188;transition:stroke-dashoffset 1.2s ease}
-.qs-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:var(--text);font-family:'JetBrains Mono',monospace}
-/* CHARTS SECTION */
-.chart-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:24px}
-.chart-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
-.chart-header-left h3{font-size:15px;font-weight:700;color:var(--text)}
-.chart-header-left p{font-size:12px;color:var(--muted);margin-top:2px}
-.chart-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.col-select{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:7px 12px;font-size:12px;font-family:'Inter',sans-serif;color:var(--text);outline:none;cursor:pointer;transition:border-color .2s}
-.col-select:focus{border-color:var(--orange)}
-.chart-type-btns{display:flex;gap:4px}
-.ctbtn{padding:7px 12px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--bg);color:var(--muted);font-family:'Inter',sans-serif;transition:all .18s;display:flex;align-items:center;gap:5px}
-.ctbtn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
-.ctbtn.active,.ctbtn:hover{background:var(--orange);color:#fff;border-color:var(--orange)}
-.chart-actions{display:flex;gap:6px}
-.chart-action-btn{padding:7px 12px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--bg2);color:var(--muted);font-family:'Inter',sans-serif;transition:all .18s;display:flex;align-items:center;gap:5px}
-.chart-action-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
-.chart-action-btn:hover{border-color:var(--orange);color:var(--orange)}
+.qs-ring{width:72px;height:72px;position:relative;margin:0 auto 8px}
+.qs-svg{width:72px;height:72px;transform:rotate(-90deg)}
+.qs-bg{fill:none;stroke:var(--bg3);stroke-width:5}
+.qs-fill{fill:none;stroke:var(--orange);stroke-width:5;stroke-linecap:round;stroke-dasharray:188;stroke-dashoffset:188;transition:stroke-dashoffset 1.2s ease}
+.qs-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--text);font-family:'JetBrains Mono',monospace}
+
+/* CHARTS — CLEAN & PROFESSIONAL */
+.charts-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:24px;margin-bottom:24px}
+.charts-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:gap}
+.charts-title{font-size:15px;font-weight:700;color:var(--text)}
+.chart-type-picker{display:flex;gap:6px;flex-wrap:wrap}
+.ct-btn{padding:6px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--bg);color:var(--muted);font-family:'Inter',sans-serif;transition:all .17s;display:flex;align-items:center;gap:5px}
+.ct-btn:hover{border-color:var(--orange);color:var(--orange)}
+.ct-btn.active{background:var(--orange);color:#fff;border-color:var(--orange)}
+.chart-col-picker{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.cc-btn{padding:4px 12px;border-radius:100px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--bg);color:var(--muted);font-family:'Inter',sans-serif;transition:all .17s}
+.cc-btn:hover{border-color:var(--orange);color:var(--orange)}
+.cc-btn.active{background:rgba(234,108,30,0.1);color:var(--orange);border-color:var(--orange)}
 .chart-canvas-wrap{position:relative;height:320px;width:100%}
-.chart-empty-state{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted2);gap:10px}
+.chart-empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:320px;color:var(--muted2);font-size:13px;gap:10px}
 .chart-empty-state svg{width:36px;height:36px;stroke:var(--border2);fill:none;stroke-width:1.5;stroke-linecap:round}
-.chart-empty-state p{font-size:13px}
 .chart-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
-.cs-item{text-align:center}
-.cs-val{font-size:16px;font-weight:700;color:var(--text);font-family:'JetBrains Mono',monospace}
-.cs-lbl{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.5px;margin-top:2px}
+.csr-item{text-align:center}
+.csr-val{font-size:16px;font-weight:800;color:var(--text);font-family:'JetBrains Mono',monospace}
+.csr-lbl{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.8px;margin-top:2px}
+.fullscreen-btn{padding:6px 12px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--muted);font-family:'Inter',sans-serif;transition:all .17s;display:flex;align-items:center;gap:4px}
+.fullscreen-btn:hover{border-color:var(--orange);color:var(--orange)}
+.fullscreen-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+
+/* FULLSCREEN OVERLAY */
+.fs-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:8000;flex-direction:column;padding:24px}
+.fs-overlay.on{display:flex}
+.fs-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.fs-title{font-size:18px;font-weight:700;color:#fff}
+.fs-close{background:rgba(255,255,255,0.1);border:none;color:#fff;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center}
+.fs-canvas-wrap{flex:1;position:relative}
+.fs-note{font-size:11px;color:rgba(255,255,255,0.3);text-align:center;margin-top:12px}
+
 /* ASK */
-.ask-box{position:relative}
 .ask-ta{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:11px 46px 11px 14px;font-size:12.5px;font-family:'Inter',sans-serif;color:var(--text);resize:none;outline:none;transition:border-color .2s;min-height:76px}
 .ask-ta:focus{border-color:var(--orange);background:var(--bg2)}
 .ask-ta::placeholder{color:var(--muted2)}
+.ask-box{position:relative}
 .ask-send{position:absolute;right:9px;bottom:9px;background:var(--orange);color:#fff;border:none;width:30px;height:30px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s}
 .ask-send:hover{background:var(--orange2)}
 .ask-send svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round}
 .ask-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
 .chip{background:var(--bg2);border:1px solid var(--border);border-radius:100px;padding:4px 11px;font-size:11px;color:var(--muted);cursor:pointer;transition:all .17s;white-space:nowrap;font-family:'Inter',sans-serif}
 .chip:hover{border-color:var(--orange);color:var(--orange);background:rgba(234,108,30,0.04)}
-.ask-resp{margin-top:12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:14px;font-size:13px;color:var(--text);line-height:1.7;display:none;white-space:pre-line}
+.ask-resp{margin-top:12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:14px;font-size:13px;color:var(--text);line-height:1.75;display:none;white-space:pre-line}
+
 /* TABS */
 .tab-bar{display:flex;gap:2px;background:var(--bg3);border-radius:8px;padding:3px;margin-bottom:14px}
 .tab{flex:1;padding:7px 10px;border-radius:6px;font-size:11.5px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;transition:all .17s;text-align:center}
@@ -180,6 +188,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .tp{display:none}.tp.active{display:block}
 .exp-txt{font-size:12.5px;color:var(--muted);line-height:1.75;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:14px;white-space:pre-line}
 .exp-txt.ph{color:var(--muted2);font-style:italic}
+
 /* AUDIO */
 .audio-player{background:var(--dark);border-radius:var(--rl);padding:20px;color:#fff}
 .ap-lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:13px}
@@ -200,6 +209,15 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .ap-actions{display:flex;gap:7px;margin-top:11px}
 .ap-action{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border-radius:7px;padding:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .17s;text-align:center}
 .ap-action:hover{background:rgba(234,108,30,0.3);color:#fff}
+
+/* EXPORT */
+.export-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.export-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:20px;text-align:center;cursor:pointer;transition:all .2s}
+.export-card:hover{border-color:var(--orange);background:rgba(234,108,30,0.04);transform:translateY(-2px)}
+.export-icon{font-size:28px;margin-bottom:10px}
+.export-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.export-desc{font-size:11px;color:var(--muted2)}
+
 /* ACTUARIAL */
 .act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
 .act-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:17px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
@@ -211,16 +229,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .act-title{font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:3px}
 .act-desc{font-size:11px;color:var(--muted2);line-height:1.5}
 .act-tag{display:inline-block;margin-top:7px;padding:2px 7px;background:rgba(234,108,30,0.08);border:1px solid rgba(234,108,30,0.15);border-radius:100px;font-size:9.5px;font-weight:600;color:var(--orange)}
-/* REPORT */
-.rpt-btns{display:flex;gap:9px;flex-wrap:wrap}
-.rbt{padding:9px 18px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .18s;display:flex;align-items:center;gap:6px}
-.rbt svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
-.rbt-dark{background:var(--dark);color:#fff}
-.rbt-dark:hover{background:var(--dark2)}
-.rbt-orange{background:var(--orange);color:#fff}
-.rbt-orange:hover{background:var(--orange2)}
-.rbt-outline{background:transparent;color:var(--orange);border:1.5px solid var(--orange)}
-.rbt-outline:hover{background:rgba(234,108,30,0.06)}
+
 /* HISTORY */
 .hist-list{display:flex;flex-direction:column;gap:7px}
 .hist-item{display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:11px 14px;cursor:pointer;transition:all .18s}
@@ -232,61 +241,64 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .hi-sc{font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px;font-family:'JetBrains Mono',monospace;background:rgba(234,108,30,0.1);color:var(--orange)}
 .empty-h{text-align:center;padding:28px;color:var(--muted2);font-size:12px}
 .empty-h svg{width:28px;height:28px;stroke:var(--border2);fill:none;stroke-width:1.5;stroke-linecap:round;display:block;margin:0 auto 7px}
+
 /* TOAST */
 .toast{position:fixed;bottom:22px;right:22px;background:var(--dark);color:#fff;border-radius:9px;padding:11px 16px;font-size:12.5px;font-weight:500;box-shadow:0 8px 28px rgba(0,0,0,0.18);z-index:9999;transform:translateY(70px);opacity:0;transition:all .28s;max-width:300px;display:flex;align-items:center;gap:9px}
 .toast.show{transform:translateY(0);opacity:1}
 .toast.ok-t{border-left:3px solid var(--ok)}
 .toast.warn-t{border-left:3px solid var(--orange)}
-/* FULLSCREEN */
-.fullscreen-btn{padding:7px 12px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--bg2);color:var(--muted);font-family:'Inter',sans-serif;transition:all .18s;display:flex;align-items:center;gap:5px}
-.fullscreen-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
-.fullscreen-btn:hover{border-color:var(--orange);color:var(--orange)}
+
 @media(max-width:880px){
-  .sidebar{transform:translateX(-230px)}
-  .sidebar.open{transform:translateX(0)}
-  .main{margin-left:0}
-  .g5{grid-template-columns:1fr 1fr}
-  .act-grid{grid-template-columns:1fr 1fr}
-  .hbg{display:flex}
-  .ov-bar{grid-template-columns:1fr 1fr;gap:10px}
-  .ov-stat:not(:last-child)::after{display:none}
+  .sidebar{transform:translateX(-232px)}.sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}.g5{grid-template-columns:1fr 1fr}.act-grid{grid-template-columns:1fr 1fr}
+  .hbg{display:flex}.ov-bar{grid-template-columns:1fr 1fr;gap:10px}
+  .ov-stat:not(:last-child)::after{display:none}.export-grid{grid-template-columns:1fr}
   .chart-stats-row{grid-template-columns:1fr 1fr}
-  .chart-controls{flex-direction:column;align-items:flex-start}
 }
 @media(max-width:580px){
-  .g5{grid-template-columns:1fr}
-  .act-grid{grid-template-columns:1fr}
-  .content{padding:14px}
-  .rpt-btns{flex-direction:column}
-  .tab{font-size:10.5px;padding:6px 6px}
-  .chart-canvas-wrap{height:220px}
+  .g5{grid-template-columns:1fr}.act-grid{grid-template-columns:1fr}
+  .content{padding:14px}.tab{font-size:10.5px;padding:6px 6px}
+  .chart-type-picker{gap:4px}.ct-btn{padding:5px 10px;font-size:11px}
 }
 </style>
 </head>
 <body>
 
-<!-- AUTH OVERLAY -->
-<div class="auth-overlay" id="authOverlay">
+<!-- AUTH SCREEN -->
+<div class="auth-screen" id="authScreen">
   <div class="auth-box">
-    <div class="auth-logo">
-      <div class="auth-mark"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <div class="auth-name">Stat<span>Lens</span></div>
-    </div>
-    <div class="auth-title" id="authTitle">Welcome back</div>
-    <div class="auth-sub" id="authSub">Sign in to your StatLens account</div>
+    <div class="auth-logo"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+    <div class="auth-title">StatLens</div>
+    <div class="auth-sub">Statistical Analytics Platform</div>
     <div class="auth-tabs">
-      <button class="auth-tab active" onclick="switchAuth('login',this)" id="loginTab">Sign In</button>
-      <button class="auth-tab" onclick="switchAuth('register',this)" id="registerTab">Create Account</button>
+      <button class="auth-tab active" onclick="switchAuth('login')">Sign In</button>
+      <button class="auth-tab" onclick="switchAuth('signup')">Create Account</button>
     </div>
-    <div class="auth-err" id="authErr"></div>
-    <div id="registerFields" style="display:none">
-      <div class="auth-field"><label class="auth-label">Full Name</label><input class="auth-input" id="authName" type="text" placeholder="Simon Abdullahi"/></div>
+    <div class="auth-form" id="loginForm">
+      <div><div class="auth-label">Email</div><input class="auth-input" type="email" id="loginEmail" placeholder="you@example.com"/></div>
+      <div><div class="auth-label">Password</div><input class="auth-input" type="password" id="loginPass" placeholder="••••••••"/></div>
+      <div class="auth-err" id="loginErr">Invalid email or password</div>
+      <button class="auth-btn" onclick="doLogin()">Sign In</button>
     </div>
-    <div class="auth-field"><label class="auth-label">Email Address</label><input class="auth-input" id="authEmail" type="email" placeholder="you@example.com"/></div>
-    <div class="auth-field"><label class="auth-label">Password</label><input class="auth-input" id="authPassword" type="password" placeholder="••••••••"/></div>
-    <button class="auth-btn" onclick="handleAuth()" id="authBtn">Sign In</button>
-    <div class="auth-switch" id="authSwitch">Don't have an account? <a onclick="switchAuth('register',document.getElementById('registerTab'))">Create one free</a></div>
+    <div class="auth-form" id="signupForm" style="display:none">
+      <div><div class="auth-label">Full Name</div><input class="auth-input" type="text" id="signupName" placeholder="Simon Mgbe"/></div>
+      <div><div class="auth-label">Email</div><input class="auth-input" type="email" id="signupEmail" placeholder="you@example.com"/></div>
+      <div><div class="auth-label">Password</div><input class="auth-input" type="password" id="signupPass" placeholder="Min 6 characters"/></div>
+      <div class="auth-err" id="signupErr">Please fill all fields</div>
+      <button class="auth-btn" onclick="doSignup()">Create Account</button>
+    </div>
+    <div class="auth-switch" id="authSwitch">Don't have an account? <span onclick="switchAuth('signup')">Sign up free</span></div>
   </div>
+</div>
+
+<!-- FULLSCREEN CHART OVERLAY -->
+<div class="fs-overlay" id="fsOverlay">
+  <div class="fs-header">
+    <div class="fs-title" id="fsTitle">Chart — Fullscreen</div>
+    <button class="fs-close" onclick="closeFullscreen()">✕</button>
+  </div>
+  <div class="fs-canvas-wrap"><canvas id="fsChart"></canvas></div>
+  <div class="fs-note">Connect to a projector or external display for presentations</div>
 </div>
 
 <div class="app">
@@ -296,10 +308,6 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
       <div class="sb-mark"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
       <div><div class="sb-name">Stat<span>Lens</span></div><div class="sb-tag">Analytics Platform</div></div>
     </div>
-  </div>
-  <div class="sb-user">
-    <div class="sb-avatar" id="sbAvatar">S</div>
-    <div><div class="sb-uname" id="sbName">Loading...</div><div class="sb-uemail" id="sbEmail"></div></div>
   </div>
   <nav class="sb-nav">
     <div class="sb-sec">Main</div>
@@ -311,17 +319,18 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
     <div class="sb-sec">Analysis</div>
     <button class="sbi" onclick="goto('ask-sec')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Ask StatLens</button>
     <button class="sbi" onclick="goto('results-sec')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Results<span class="sb-badge">4</span></button>
-    <button class="sbi" onclick="goto('audio-sec')"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>Audio</button>
+    <button class="sbi" onclick="goto('audio-sec')"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>Audio</button>
     <button class="sbi" onclick="goto('act-sec')"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Actuarial Tools</button>
     <div class="sb-sec">Output</div>
-    <button class="sbi" onclick="goto('report-sec')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export Report</button>
+    <button class="sbi" onclick="goto('export-sec')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button>
     <button class="sbi" onclick="goto('hist-sec')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>History</button>
   </nav>
   <div class="sb-bottom">
-    <button class="sb-logout" onclick="logout()">
-      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      Sign Out
-    </button>
+    <div class="sb-user">
+      <div class="user-avatar" id="sbAvatar">?</div>
+      <div style="flex:1;min-width:0"><div class="sb-user-name" id="sbUserName">Not signed in</div><div class="sb-user-email" id="sbUserEmail"></div></div>
+      <button class="sb-logout" onclick="doLogout()">Sign out</button>
+    </div>
   </div>
 </aside>
 
@@ -332,9 +341,9 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
       <div><div class="pg-title">Statistical Analytics Dashboard</div><div class="pg-sub" id="pgSub">Upload a file to begin your analysis</div></div>
     </div>
     <div class="topbar-right">
-      <button class="tbtn tbtn-ghost" onclick="exportPDF()"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>PDF</button>
-      <button class="tbtn tbtn-ghost" onclick="exportExcel()"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>Excel</button>
+      <button class="tbtn tbtn-ghost" onclick="goto('export-sec')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button>
       <button class="tbtn tbtn-primary" onclick="goto('upload-sec')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>New Analysis</button>
+      <div class="user-avatar" id="topAvatar" onclick="doLogout()" title="Sign out">?</div>
     </div>
   </div>
 
@@ -347,6 +356,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
       <div class="ov-stat"><div class="ov-num" id="ov-anom">—</div><div class="ov-lbl">Anomalies</div></div>
     </div>
 
+    <!-- UPLOAD -->
     <div class="sb2" id="upload-sec">
       <div class="sec-title">Upload Your Data</div>
       <div class="sec-sub">CSV, Excel, PDF, or image files. Files are never stored after analysis.</div>
@@ -369,11 +379,12 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           Run Analysis
         </button>
-        <div class="st-bar st-load" id="stLoad"><div class="spin"></div><span id="stTxt">Analyzing your data…</span></div>
+        <div class="st-bar st-load" id="stLoad"><div class="spin"></div><span id="stTxt">Analyzing…</span></div>
         <div class="st-bar st-err" id="stErr"></div>
       </div>
     </div>
 
+    <!-- DATA QUALITY -->
     <div class="sb2" id="quality-sec">
       <div class="sec-title">Data Quality</div>
       <div class="sec-sub">Dataset structure, completeness, and quality score.</div>
@@ -386,6 +397,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
       </div>
     </div>
 
+    <!-- STATISTICS -->
     <div class="sb2" id="stats-sec">
       <div class="sec-title">Descriptive Statistics</div>
       <div class="sec-sub">Key statistical measures from your numeric columns.</div>
@@ -398,62 +410,50 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
       </div>
     </div>
 
+    <!-- CHARTS — PROFESSIONAL -->
     <div class="sb2" id="charts-sec">
       <div class="sec-title">Charts & Visualizations</div>
-      <div class="sec-sub">Real data from your uploaded file. Select column and chart type below.</div>
-      <div class="chart-section">
-        <div class="chart-header">
-          <div class="chart-header-left">
-            <h3>Data Visualization</h3>
-            <p id="chartSubtitle">Upload a file to see your data as charts</p>
-          </div>
-          <div class="chart-controls">
-            <select class="col-select" id="colSelect" onchange="updateChart()">
-              <option value="">Select column...</option>
-            </select>
-            <div class="chart-type-btns">
-              <button class="ctbtn active" onclick="setChartType('bar',this)" title="Bar Chart">
-                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Bar
-              </button>
-              <button class="ctbtn" onclick="setChartType('line',this)" title="Line Chart">
-                <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Line
-              </button>
-              <button class="ctbtn" onclick="setChartType('doughnut',this)" title="Pie Chart">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>Pie
-              </button>
-              <button class="ctbtn" onclick="setChartType('radar',this)" title="Radar Chart">
-                <svg viewBox="0 0 24 24"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>Radar
-              </button>
-            </div>
-            <div class="chart-actions">
-              <button class="chart-action-btn fullscreen-btn" onclick="toggleFullscreen()" title="Fullscreen / Projector">
-                <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>Fullscreen
-              </button>
-              <button class="chart-action-btn" onclick="downloadChart()" title="Download Chart">
-                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save
-              </button>
+      <div class="sec-sub">Select chart type and column to visualize your real data.</div>
+      <div class="charts-section">
+        <div class="charts-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">Chart Type</div>
+            <div class="chart-type-picker">
+              <button class="ct-btn active" onclick="setChartType('bar',this)">📊 Bar</button>
+              <button class="ct-btn" onclick="setChartType('line',this)">📈 Line</button>
+              <button class="ct-btn" onclick="setChartType('doughnut',this)">🍩 Doughnut</button>
+              <button class="ct-btn" onclick="setChartType('radar',this)">🕸 Radar</button>
+              <button class="ct-btn" onclick="setChartType('polarArea',this)">🎯 Polar</button>
             </div>
           </div>
+          <div style="display:flex;gap:8px">
+            <button class="fullscreen-btn" onclick="openFullscreen()"><svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>Fullscreen</button>
+          </div>
+        </div>
+        <div style="margin-bottom:14px">
+          <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Select Column</div>
+          <div class="chart-col-picker" id="colPicker"><div style="font-size:12px;color:var(--muted2)">Upload a CSV file to see column options</div></div>
         </div>
         <div class="chart-canvas-wrap" id="chartWrap">
           <div class="chart-empty-state" id="chartEmpty">
             <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            <p>Upload a CSV file and run analysis to see your data as charts</p>
+            Upload a CSV file and run analysis to see real charts
           </div>
           <canvas id="mainChart" style="display:none"></canvas>
         </div>
         <div class="chart-stats-row" id="chartStatsRow" style="display:none">
-          <div class="cs-item"><div class="cs-val" id="cs-total">—</div><div class="cs-lbl">Total</div></div>
-          <div class="cs-item"><div class="cs-val" id="cs-avg">—</div><div class="cs-lbl">Average</div></div>
-          <div class="cs-item"><div class="cs-val" id="cs-high">—</div><div class="cs-lbl">Highest</div></div>
-          <div class="cs-item"><div class="cs-val" id="cs-low">—</div><div class="cs-lbl">Lowest</div></div>
+          <div class="csr-item"><div class="csr-val" id="csr-total">—</div><div class="csr-lbl">Total</div></div>
+          <div class="csr-item"><div class="csr-val" id="csr-avg">—</div><div class="csr-lbl">Average</div></div>
+          <div class="csr-item"><div class="csr-val" id="csr-high">—</div><div class="csr-lbl">Highest</div></div>
+          <div class="csr-item"><div class="csr-val" id="csr-low">—</div><div class="csr-lbl">Lowest</div></div>
         </div>
       </div>
     </div>
 
+    <!-- ASK STATLENS -->
     <div class="sb2" id="ask-sec">
       <div class="sec-title">Ask StatLens</div>
-      <div class="sec-sub">Ask any question about your data. Get specific, accurate answers and recommendations.</div>
+      <div class="sec-sub">Ask any question about your data — get intelligent, specific answers.</div>
       <div class="card">
         <div class="ask-box">
           <textarea class="ask-ta" id="askTA" placeholder="e.g. What is my profit margin? Which month had the highest revenue? Give me recommendations." rows="3" aria-label="Ask a question"></textarea>
@@ -471,50 +471,48 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
       </div>
     </div>
 
+    <!-- RESULTS TABS -->
     <div class="sb2" id="results-sec">
       <div class="sec-title">Analysis Results</div>
       <div class="sec-sub">Four perspectives on your data.</div>
       <div class="card">
         <div class="tab-bar" role="tablist">
-          <button class="tab active" onclick="swTab('simple',this)" role="tab">Simple</button>
-          <button class="tab" onclick="swTab('technical',this)" role="tab">Technical</button>
-          <button class="tab" onclick="swTab('business',this)" role="tab">Business</button>
-          <button class="tab" onclick="swTab('warnings',this)" role="tab">Warnings</button>
+          <button class="tab active" onclick="swTab('simple',this)">Simple</button>
+          <button class="tab" onclick="swTab('technical',this)">Technical</button>
+          <button class="tab" onclick="swTab('business',this)">Business</button>
+          <button class="tab" onclick="swTab('warnings',this)">Warnings</button>
         </div>
-        <div class="tp active" id="tp-simple"><div class="exp-txt ph" id="txt-simple">Upload a file and run analysis to see a plain-English summary of your data.</div></div>
+        <div class="tp active" id="tp-simple"><div class="exp-txt ph" id="txt-simple">Upload a file and run analysis to see a plain-English summary.</div></div>
         <div class="tp" id="tp-technical"><div class="exp-txt ph" id="txt-tech">Technical statistical breakdown appears here after analysis.</div></div>
         <div class="tp" id="tp-business"><div class="exp-txt ph" id="txt-biz">Business interpretation and recommendations appear here after analysis.</div></div>
-        <div class="tp" id="tp-warnings"><div class="exp-txt ph" id="txt-warn">Data quality warnings and limitations appear here after analysis.</div></div>
+        <div class="tp" id="tp-warnings"><div class="exp-txt ph" id="txt-warn">Data quality warnings appear here after analysis.</div></div>
       </div>
     </div>
 
+    <!-- AUDIO -->
     <div class="sb2" id="audio-sec">
       <div class="sec-title">Listen to Explanation</div>
-      <div class="sec-sub">Audio narration of your analysis results with speed control.</div>
+      <div class="sec-sub">Audio narration of your analysis — play directly in your browser.</div>
       <div class="audio-player">
         <div class="ap-lbl">Audio Explanation</div>
         <div class="ap-controls">
           <button class="ap-play" id="apPlay" onclick="togglePlay()" aria-label="Play/Pause"><svg id="apIcon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
           <div class="ap-info">
-            <div class="ap-track" id="apTrack">Run analysis to generate audio explanation</div>
+            <div class="ap-track" id="apTrack">Run analysis to generate audio</div>
             <div class="ap-prog-wrap"><div class="ap-prog" id="apProg"></div></div>
-            <div class="ap-time" id="apTime">0:00 / 0:00</div>
+            <div class="ap-time" id="apTime">0:00</div>
           </div>
         </div>
-        <div class="ap-speeds">
-          <span class="sp-lbl">Speed:</span>
-          <button class="ap-spd active" onclick="setSpd(1,this)">1x</button>
-          <button class="ap-spd" onclick="setSpd(1.25,this)">1.25x</button>
-          <button class="ap-spd" onclick="setSpd(1.5,this)">1.5x</button>
-        </div>
+        <div class="ap-speeds"><span class="sp-lbl">Speed:</span><button class="ap-spd active" onclick="setSpd(1,this)">1x</button><button class="ap-spd" onclick="setSpd(1.25,this)">1.25x</button><button class="ap-spd" onclick="setSpd(1.5,this)">1.5x</button></div>
         <div class="ap-transcript" id="apTx">Transcript will appear here after analysis.</div>
         <div class="ap-actions">
-          <button class="ap-action" onclick="simplifyExplanation()">🔤 Explain More Simply</button>
+          <button class="ap-action" onclick="simplify()">🔤 Explain More Simply</button>
           <button class="ap-action" onclick="explainChart()">📊 Explain This Chart</button>
         </div>
       </div>
     </div>
 
+    <!-- ACTUARIAL -->
     <div class="sb2" id="act-sec">
       <div class="sec-title">Actuarial Tools</div>
       <div class="sec-sub">Specialized tools for actuaries, statisticians, and risk analysts.</div>
@@ -523,28 +521,40 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
         <div class="act-card" onclick="openTool('loss-ratio')"><div class="act-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="act-title">Loss Ratio Analysis</div><div class="act-desc">Calculate incurred losses to earned premium ratios.</div><span class="act-tag">P&C</span></div>
         <div class="act-card" onclick="openTool('combined-ratio')"><div class="act-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div><div class="act-title">Combined Ratio</div><div class="act-desc">Track underwriting profitability across periods.</div><span class="act-tag">Underwriting</span></div>
         <div class="act-card" onclick="openTool('reserving')"><div class="act-ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="act-title">Claims Reserving</div><div class="act-desc">Chain-ladder and Bornhuetter-Ferguson methods for IBNR estimation.</div><span class="act-tag">Reserving</span></div>
-        <div class="act-card" onclick="openTool('scenario')"><div class="act-ic"><svg viewBox="0 0 24 24"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 4v16"/></svg></div><div class="act-title">Scenario Testing</div><div class="act-desc">Stress-test data under best-case, base-case, and worst-case scenarios.</div><span class="act-tag">Risk</span></div>
+        <div class="act-card" onclick="openTool('scenario')"><div class="act-ic"><svg viewBox="0 0 24 24"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 4v16"/></svg></div><div class="act-title">Scenario Testing</div><div class="act-desc">Model best-case, base-case, and worst-case scenarios.</div><span class="act-tag">Risk</span></div>
         <div class="act-card" onclick="openTool('monte-carlo')"><div class="act-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></div><div class="act-title">Monte Carlo Simulation</div><div class="act-desc">Run thousands of simulations to model uncertainty and risk.</div><span class="act-tag">Simulation</span></div>
       </div>
     </div>
 
-    <div class="sb2" id="report-sec">
-      <div class="sec-title">Generate Report</div>
-      <div class="sec-sub">Export your analysis as a professional report.</div>
-      <div class="card">
-        <div class="rpt-btns">
-          <button class="rbt rbt-dark" onclick="genReport()"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Generate Report</button>
-          <button class="rbt rbt-orange" onclick="exportPDF()"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export PDF</button>
-          <button class="rbt rbt-outline" onclick="exportExcel()"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>Export Excel</button>
+    <!-- EXPORT -->
+    <div class="sb2" id="export-sec">
+      <div class="sec-title">Export & Share</div>
+      <div class="sec-sub">Save your analysis or present it on any screen.</div>
+      <div class="export-grid">
+        <div class="export-card" onclick="exportPDF()">
+          <div class="export-icon">📄</div>
+          <div class="export-title">Export PDF</div>
+          <div class="export-desc">Save a complete PDF report of your analysis results</div>
         </div>
-        <div id="rptPrev" style="display:none;margin-top:18px;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:18px" id="reportContent">
-          <div style="font-size:15px;font-weight:800;color:var(--text);margin-bottom:3px">StatLens — Analysis Report</div>
-          <div style="font-size:10px;color:var(--muted2);margin-bottom:12px;font-family:'JetBrains Mono',monospace" id="rptDate"></div>
-          <div style="font-size:12.5px;color:var(--muted);line-height:1.75;white-space:pre-line" id="rptContent2"></div>
+        <div class="export-card" onclick="exportExcel()">
+          <div class="export-icon">📊</div>
+          <div class="export-title">Export Excel</div>
+          <div class="export-desc">Download your data and statistics as an Excel file</div>
         </div>
+        <div class="export-card" onclick="openFullscreen()">
+          <div class="export-icon">🖥️</div>
+          <div class="export-title">Present on Screen</div>
+          <div class="export-desc">Open fullscreen chart view — connect to projector or display</div>
+        </div>
+      </div>
+      <div id="rptPrev" style="display:none;margin-top:18px;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:18px">
+        <div style="font-size:15px;font-weight:800;color:var(--text);margin-bottom:3px">StatLens — Analysis Report</div>
+        <div style="font-size:10px;color:var(--muted2);margin-bottom:12px;font-family:'JetBrains Mono',monospace" id="rptDate"></div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.75;white-space:pre-line" id="rptContent"></div>
       </div>
     </div>
 
+    <!-- HISTORY -->
     <div class="sb2" id="hist-sec">
       <div class="sec-title">Analysis History</div>
       <div class="sec-sub">Your recently analyzed files.</div>
@@ -558,72 +568,68 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 
 <script>
 var BACKEND = 'https://statlens-pro.onrender.com';
-var S = { file:null, playing:false, prog:0, timer:null, speed:1, hist:[], lastInsights:'', lastFile:'', chartData:[], chartType:'bar', chartInst:null, currentUser:null };
+var S = { file:null, playing:false, prog:0, timer:null, speed:1, hist:[], lastInsights:'', lastFile:'', chartData:[], chartType:'bar', activeCol:0, mainChart:null, fsChart:null };
 
 /* ── AUTH ── */
-function switchAuth(mode, btn) {
-  document.querySelectorAll('.auth-tab').forEach(function(t){ t.classList.remove('active'); });
-  btn.classList.add('active');
-  var isReg = mode === 'register';
-  document.getElementById('registerFields').style.display = isReg ? 'block' : 'none';
-  document.getElementById('authTitle').textContent = isReg ? 'Create your account' : 'Welcome back';
-  document.getElementById('authSub').textContent = isReg ? 'Start analyzing data for free' : 'Sign in to your StatLens account';
-  document.getElementById('authBtn').textContent = isReg ? 'Create Account' : 'Sign In';
-  document.getElementById('authSwitch').innerHTML = isReg ? 'Already have an account? <a onclick="switchAuth('login',document.getElementById('loginTab'))">Sign in</a>' : 'Don't have an account? <a onclick="switchAuth('register',document.getElementById('registerTab'))">Create one free</a>';
-  document.getElementById('authErr').style.display = 'none';
+var users = JSON.parse(localStorage.getItem('sl_users') || '[]');
+var currentUser = JSON.parse(localStorage.getItem('sl_current') || 'null');
+
+function switchAuth(mode) {
+  document.querySelectorAll('.auth-tab').forEach(function(t,i){ t.classList.toggle('active', (mode==='login'&&i===0)||(mode==='signup'&&i===1)); });
+  document.getElementById('loginForm').style.display = mode==='login'?'flex':'none';
+  document.getElementById('signupForm').style.display = mode==='signup'?'flex':'none';
+  document.getElementById('authSwitch').innerHTML = mode==='login' ? 'Don't have an account? <span onclick="switchAuth('signup')">Sign up free</span>' : 'Already have an account? <span onclick="switchAuth('login')">Sign in</span>';
 }
 
-function handleAuth() {
-  var email = document.getElementById('authEmail').value.trim();
-  var password = document.getElementById('authPassword').value;
-  var name = document.getElementById('authName') ? document.getElementById('authName').value.trim() : '';
-  var isReg = document.getElementById('registerFields').style.display !== 'none';
-  var errEl = document.getElementById('authErr');
-  errEl.style.display = 'none';
-  if (!email || !password) { errEl.textContent = 'Please fill in all fields.'; errEl.style.display = 'block'; return; }
-  if (password.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.style.display = 'block'; return; }
-  if (isReg && !name) { errEl.textContent = 'Please enter your name.'; errEl.style.display = 'block'; return; }
-  if (isReg) {
-    var users = JSON.parse(localStorage.getItem('sl_users') || '{}');
-    if (users[email]) { errEl.textContent = 'An account with this email already exists.'; errEl.style.display = 'block'; return; }
-    users[email] = { name: name, password: password, created: new Date().toISOString() };
-    localStorage.setItem('sl_users', JSON.stringify(users));
-    loginUser({ email: email, name: name });
-  } else {
-    var users = JSON.parse(localStorage.getItem('sl_users') || '{}');
-    if (!users[email] || users[email].password !== password) { errEl.textContent = 'Invalid email or password.'; errEl.style.display = 'block'; return; }
-    loginUser({ email: email, name: users[email].name });
-  }
+function doLogin() {
+  var email = document.getElementById('loginEmail').value.trim();
+  var pass = document.getElementById('loginPass').value;
+  var user = users.find(function(u){ return u.email===email && u.pass===pass; });
+  if (!user) { document.getElementById('loginErr').style.display='block'; return; }
+  document.getElementById('loginErr').style.display='none';
+  currentUser = user;
+  localStorage.setItem('sl_current', JSON.stringify(user));
+  showApp();
 }
 
-function loginUser(user) {
-  S.currentUser = user;
-  localStorage.setItem('sl_session', JSON.stringify(user));
-  document.getElementById('authOverlay').style.display = 'none';
-  document.getElementById('sbName').textContent = user.name || user.email;
-  document.getElementById('sbEmail').textContent = user.email;
-  document.getElementById('sbAvatar').textContent = (user.name || user.email)[0].toUpperCase();
-  var hist = JSON.parse(localStorage.getItem('sl_hist_' + user.email) || '[]');
-  S.hist = hist;
+function doSignup() {
+  var name = document.getElementById('signupName').value.trim();
+  var email = document.getElementById('signupEmail').value.trim();
+  var pass = document.getElementById('signupPass').value;
+  if (!name||!email||pass.length<6) { document.getElementById('signupErr').style.display='block'; return; }
+  if (users.find(function(u){ return u.email===email; })) { document.getElementById('signupErr').textContent='Email already registered'; document.getElementById('signupErr').style.display='block'; return; }
+  var user = { name:name, email:email, pass:pass };
+  users.push(user);
+  localStorage.setItem('sl_users', JSON.stringify(users));
+  currentUser = user;
+  localStorage.setItem('sl_current', JSON.stringify(user));
+  showApp();
+}
+
+function doLogout() {
+  currentUser = null;
+  localStorage.removeItem('sl_current');
+  document.getElementById('authScreen').style.display='flex';
+}
+
+function showApp() {
+  document.getElementById('authScreen').style.display='none';
+  var initials = currentUser.name.split(' ').map(function(n){ return n[0]; }).join('').toUpperCase().substring(0,2);
+  document.getElementById('sbAvatar').textContent = initials;
+  document.getElementById('topAvatar').textContent = initials;
+  document.getElementById('sbUserName').textContent = currentUser.name;
+  document.getElementById('sbUserEmail').textContent = currentUser.email;
+}
+
+/* ── INIT ── */
+window.addEventListener('load', function(){
+  if (currentUser) { showApp(); } else { document.getElementById('authScreen').style.display='flex'; }
   renderHist();
-  showToast('Welcome back, ' + (user.name || 'there') + '!', 'ok-t');
-}
-
-function logout() {
-  localStorage.removeItem('sl_session');
-  S.currentUser = null;
-  document.getElementById('authOverlay').style.display = 'flex';
-  showToast('Signed out successfully', 'ok-t');
-}
-
-function checkSession() {
-  var session = localStorage.getItem('sl_session');
-  if (session) { try { loginUser(JSON.parse(session)); } catch(e) { localStorage.removeItem('sl_session'); } }
-}
+});
 
 /* ── SIDEBAR ── */
 function toggleSB(){ document.getElementById('sidebar').classList.toggle('open'); }
-document.addEventListener('click', function(e){ var sb=document.getElementById('sidebar'),hb=document.getElementById('hbg'); if(sb&&hb&&sb.classList.contains('open')&&!sb.contains(e.target)&&!hb.contains(e.target)) sb.classList.remove('open'); });
+document.addEventListener('click', function(e){ var sb=document.getElementById('sidebar'),hb=document.getElementById('hbg'); if(sb.classList.contains('open')&&!sb.contains(e.target)&&!hb.contains(e.target)) sb.classList.remove('open'); });
 function goto(id){ var el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); document.getElementById('sidebar').classList.remove('open'); }
 
 /* ── FILE UPLOAD ── */
@@ -663,22 +669,25 @@ function fillResults(analysis, name){
   var ins=analysis.insights||'Analysis complete.';
   S.lastInsights=ins; S.lastFile=name;
   setTab('txt-simple',ins);
-  setTab('txt-tech','Rows: '+(f.rows||0)+' | Cols: '+(f.cols||0)+' | Mean: '+(f.mean||0).toLocaleString()+' | Median: '+(f.median||0).toLocaleString()+' | Std Dev: '+(f.std||0).toLocaleString()+' | Min: '+(f.min||0).toLocaleString()+' | Max: '+(f.max||0).toLocaleString()+'. Anomalies: '+(analysis.anomalies||0)+'. Quality: '+(f.quality||0)+'%.');
-  setTab('txt-biz','Total profit: $'+(f.profit||0).toLocaleString()+'. Expenses: $'+(f.expenses||0).toLocaleString()+'. Loss: $'+(f.loss||0).toLocaleString()+'. Review loss months and expense spikes to improve profitability.');
-  setTab('txt-warn',(f.missing||0)+' missing values. '+(f.dupes||0)+' duplicates. '+(analysis.anomalies||0)+' anomalies flagged. Quality: '+(f.quality||0)+'%.');
+  setTab('txt-tech','Rows: '+(f.rows||0)+' | Cols: '+(f.cols||0)+' | Mean: '+(f.mean||0).toLocaleString()+' | Median: '+(f.median||0).toLocaleString()+' | Std Dev: '+(f.std||0).toLocaleString()+' | Range: '+(f.min||0).toLocaleString()+' – '+(f.max||0).toLocaleString()+'
+Anomalies: '+(analysis.anomalies||0)+' | Quality: '+(f.quality||0)+'%');
+  setTab('txt-biz','Profit: $'+(f.profit||0).toLocaleString()+' | Expenses: $'+(f.expenses||0).toLocaleString()+' | Loss periods: $'+(f.loss||0).toLocaleString()+'
+
+Recommendation: '+(f.profit>f.expenses?'Business is profitable. Focus on scaling revenue and maintaining margins.':'Expenses exceed profit. Review cost structure urgently.'));
+  setTab('txt-warn',(f.missing||0)+' missing values | '+(f.dupes||0)+' duplicates | '+(analysis.anomalies||0)+' anomalies
+Quality: '+(f.quality||0)+'%
+
+'+(f.missing>0?'Action: Fill missing values before making major decisions from this data.
+':'')+((analysis.anomalies||0)>0?'Action: Investigate '+analysis.anomalies+' flagged anomalies — they may be errors or important events.':''));
   if(analysis.chartData&&analysis.chartData.length>0){
     S.chartData=analysis.chartData;
-    var sel=document.getElementById('colSelect');
-    sel.innerHTML='<option value="">Select column...</option>';
-    analysis.chartData.forEach(function(col,i){ var opt=document.createElement('option'); opt.value=i; opt.textContent=col.name; sel.appendChild(opt); });
-    sel.value='0';
-    updateChart();
+    buildColPicker();
+    renderChart(0);
   }
-  document.getElementById('apTrack').textContent=name+' — Ready to play';
-  document.getElementById('apTx').textContent='Your dataset '+name+' contains '+(f.rows||0)+' records across '+(f.cols||0)+' columns. '+ins;
+  document.getElementById('apTrack').textContent=name+' — Ready';
+  document.getElementById('apTx').textContent=ins;
   document.getElementById('pgSub').textContent='Analyzed: '+name;
   S.hist.unshift({name:name,quality:f.quality||0,date:new Date().toLocaleDateString()});
-  if(S.currentUser) localStorage.setItem('sl_hist_'+S.currentUser.email, JSON.stringify(S.hist.slice(0,20)));
   renderHist();
   hideSt(); setBtnOff(false);
   setTimeout(function(){ document.getElementById('pw').style.display='none'; document.getElementById('pf').style.width='0%'; },900);
@@ -687,210 +696,156 @@ function fillResults(analysis, name){
 }
 
 /* ── CHARTS ── */
-function setChartType(type, btn){
-  S.chartType=type;
-  document.querySelectorAll('.ctbtn').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
-  updateChart();
+function buildColPicker(){
+  var picker=document.getElementById('colPicker');
+  picker.innerHTML='';
+  S.chartData.forEach(function(col,i){
+    var btn=document.createElement('button');
+    btn.className='cc-btn'+(i===0?' active':'');
+    btn.textContent=col.name;
+    btn.onclick=(function(idx){ return function(){ document.querySelectorAll('.cc-btn').forEach(function(b){b.classList.remove('active');}); this.classList.add('active'); renderChart(idx); }; })(i);
+    picker.appendChild(btn);
+  });
 }
 
-function updateChart(){
-  var idx=parseInt(document.getElementById('colSelect').value);
-  if(isNaN(idx)||!S.chartData[idx]) return;
-  var col=S.chartData[idx];
-  var vals=col.values;
-  var labels=vals.map(function(_,i){ return 'Row '+(i+1); });
-  var total=vals.reduce(function(a,b){return a+b;},0);
-  var avg=Math.round(total/vals.length);
-  var high=Math.max.apply(null,vals);
-  var low=Math.min.apply(null,vals);
-  document.getElementById('cs-total').textContent='$'+Math.round(total).toLocaleString();
-  document.getElementById('cs-avg').textContent='$'+avg.toLocaleString();
-  document.getElementById('cs-high').textContent='$'+high.toLocaleString();
-  document.getElementById('cs-low').textContent='$'+low.toLocaleString();
-  document.getElementById('chartStatsRow').style.display='grid';
-  document.getElementById('chartSubtitle').textContent=col.name+' — '+vals.length+' data points';
+function setChartType(type, btn){
+  S.chartType=type;
+  document.querySelectorAll('.ct-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  if(S.chartData.length>0) renderChart(S.activeCol);
+}
+
+function renderChart(colIdx){
+  S.activeCol=colIdx;
+  var col=S.chartData[colIdx];
+  if(!col) return;
   document.getElementById('chartEmpty').style.display='none';
   var canvas=document.getElementById('mainChart');
   canvas.style.display='block';
-  if(S.chartInst){ S.chartInst.destroy(); S.chartInst=null; }
-  var colors=vals.map(function(v){ return v>=0?'rgba(234,108,30,0.85)':'rgba(220,38,38,0.85)'; });
-  var borderColors=vals.map(function(v){ return v>=0?'rgba(234,108,30,1)':'rgba(220,38,38,1)'; });
-  var cfg={};
-  if(S.chartType==='bar'){
-    cfg={type:'bar',data:{labels:labels,datasets:[{label:col.name,data:vals,backgroundColor:colors,borderColor:borderColors,borderWidth:1.5,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return '$'+ctx.parsed.y.toLocaleString();}}}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return '$'+v.toLocaleString();},color:'#7a5a3a'},grid:{color:'rgba(240,213,192,0.5)'}},x:{ticks:{color:'#7a5a3a'},grid:{display:false}}}}};
-  } else if(S.chartType==='line'){
-    cfg={type:'line',data:{labels:labels,datasets:[{label:col.name,data:vals,borderColor:'#ea6c1e',backgroundColor:'rgba(234,108,30,0.08)',borderWidth:2.5,pointBackgroundColor:'#ea6c1e',pointRadius:4,pointHoverRadius:6,tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return '$'+ctx.parsed.y.toLocaleString();}}}},scales:{y:{beginAtZero:false,ticks:{callback:function(v){return '$'+v.toLocaleString();},color:'#7a5a3a'},grid:{color:'rgba(240,213,192,0.5)'}},x:{ticks:{color:'#7a5a3a'},grid:{display:false}}}}};
-  } else if(S.chartType==='doughnut'){
-    var topN=vals.slice(0,8);
-    var topL=labels.slice(0,8);
-    var pieColors=['#ea6c1e','#ff8c42','#c85a10','#ffab6e','#e85d04','#f48c06','#faa307','#ffba08'];
-    cfg={type:'doughnut',data:{labels:topL,datasets:[{data:topN,backgroundColor:pieColors,borderColor:'#fff',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#7a5a3a',font:{size:11}}},tooltip:{callbacks:{label:function(ctx){return ctx.label+': $'+ctx.parsed.toLocaleString();}}}}}};
-  } else if(S.chartType==='radar'){
-    var topN=vals.slice(0,8);
-    var topL=labels.slice(0,8);
-    cfg={type:'radar',data:{labels:topL,datasets:[{label:col.name,data:topN,borderColor:'#ea6c1e',backgroundColor:'rgba(234,108,30,0.1)',borderWidth:2,pointBackgroundColor:'#ea6c1e'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{r:{ticks:{color:'#7a5a3a',backdropColor:'transparent'},grid:{color:'rgba(240,213,192,0.5)'},pointLabels:{color:'#7a5a3a',font:{size:10}}}}}};
-  }
-  S.chartInst=new Chart(canvas,cfg);
+  if(S.mainChart){ S.mainChart.destroy(); S.mainChart=null; }
+  var ctx=canvas.getContext('2d');
+  var labels=col.values.map(function(_,i){ return 'Period '+(i+1); });
+  var colors=col.values.map(function(v,i){ return 'rgba(234,108,30,'+(0.5+i/col.values.length/2)+')'; });
+  var dataset={ label:col.name, data:col.values, backgroundColor:colors, borderColor:'rgba(234,108,30,1)', borderWidth:2, tension:0.4, fill:true, pointBackgroundColor:'#ea6c1e', pointRadius:4 };
+  S.mainChart=new Chart(ctx,{
+    type:S.chartType,
+    data:{ labels:labels, datasets:[dataset] },
+    options:{
+      responsive:true, maintainAspectRatio:false, animation:{ duration:600, easing:'easeInOutQuart' },
+      plugins:{ legend:{ display:false }, tooltip:{ callbacks:{ label:function(c){ return col.name+': $'+c.raw.toLocaleString(); } } } },
+      scales: (S.chartType==='bar'||S.chartType==='line') ? { y:{ beginAtZero:true, grid:{ color:'rgba(0,0,0,0.05)' }, ticks:{ callback:function(v){ return '$'+v.toLocaleString(); } } }, x:{ grid:{ display:false } } } : {}
+    }
+  });
+  var total=col.values.reduce(function(a,b){return a+b;},0);
+  var avg=Math.round(total/col.values.length);
+  var high=Math.max.apply(null,col.values);
+  var low=Math.min.apply(null,col.values);
+  document.getElementById('csr-total').textContent='$'+total.toLocaleString();
+  document.getElementById('csr-avg').textContent='$'+avg.toLocaleString();
+  document.getElementById('csr-high').textContent='$'+high.toLocaleString();
+  document.getElementById('csr-low').textContent='$'+low.toLocaleString();
+  document.getElementById('chartStatsRow').style.display='grid';
 }
 
-function downloadChart(){
-  if(!S.chartInst){ showToast('Run analysis first','warn-t'); return; }
-  var canvas=document.getElementById('mainChart');
-  var a=document.createElement('a'); a.download='statlens-chart.png'; a.href=canvas.toDataURL('image/png'); a.click();
-  showToast('Chart downloaded!','ok-t');
+function openFullscreen(){
+  if(!S.chartData.length){ showToast('Run analysis first','warn-t'); return; }
+  var col=S.chartData[S.activeCol];
+  document.getElementById('fsTitle').textContent=col.name+' — Fullscreen';
+  document.getElementById('fsOverlay').classList.add('on');
+  var canvas=document.getElementById('fsChart');
+  if(S.fsChart){ S.fsChart.destroy(); S.fsChart=null; }
+  var ctx=canvas.getContext('2d');
+  var labels=col.values.map(function(_,i){ return 'Period '+(i+1); });
+  var colors=col.values.map(function(v,i){ return 'rgba(234,108,30,'+(0.5+i/col.values.length/2)+')'; });
+  S.fsChart=new Chart(ctx,{
+    type:S.chartType,
+    data:{ labels:labels, datasets:[{ label:col.name, data:col.values, backgroundColor:colors, borderColor:'rgba(234,108,30,1)', borderWidth:3, tension:0.4, fill:true, pointBackgroundColor:'#ea6c1e', pointRadius:6 }] },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:true, labels:{ color:'#fff', font:{ size:14 } } }, tooltip:{ callbacks:{ label:function(c){ return col.name+': $'+c.raw.toLocaleString(); } } } },
+      scales: (S.chartType==='bar'||S.chartType==='line') ? { y:{ beginAtZero:true, grid:{ color:'rgba(255,255,255,0.1)' }, ticks:{ color:'#fff', callback:function(v){ return '$'+v.toLocaleString(); }, font:{ size:13 } } }, x:{ grid:{ display:false }, ticks:{ color:'#fff', font:{ size:13 } } } } : {}
+    }
+  });
 }
 
-function toggleFullscreen(){
-  var wrap=document.getElementById('chartWrap');
-  if(!document.fullscreenElement){ wrap.requestFullscreen().catch(function(){ showToast('Fullscreen not supported in this browser','warn-t'); }); }
-  else{ document.exitFullscreen(); }
+function closeFullscreen(){
+  document.getElementById('fsOverlay').classList.remove('on');
+  if(S.fsChart){ S.fsChart.destroy(); S.fsChart=null; }
 }
-
-/* ── ASK ── */
-function setQ(el){ document.getElementById('askTA').value=el.textContent; }
-function sendQ(){
-  var q=document.getElementById('askTA').value.trim(); if(!q) return;
-  var r=document.getElementById('askResp'); r.textContent='Thinking…'; r.style.display='block';
-  fetch(BACKEND+'/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})})
-    .then(function(x){return x.json();})
-    .then(function(d){ r.textContent=d.answer||'No answer returned.'; r.style.display='block'; })
-    .catch(function(){ r.textContent='Could not reach server. Check your connection and try again.'; });
-}
-
-/* ── AUDIO ── */
-function togglePlay(){
-  if(!S.lastInsights){ showToast('Run analysis first','warn-t'); return; }
-  if(window.speechSynthesis){
-    if(S.playing){ window.speechSynthesis.cancel(); S.playing=false; document.getElementById('apIcon').outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; clearInterval(S.timer); return; }
-    var utt=new SpeechSynthesisUtterance(S.lastInsights); utt.rate=S.speed;
-    utt.onend=function(){ S.playing=false; S.prog=0; document.getElementById('apProg').style.width='0%'; document.getElementById('apIcon').outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; clearInterval(S.timer); };
-    window.speechSynthesis.speak(utt); S.playing=true;
-    document.getElementById('apIcon').outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-    document.getElementById('apTrack').textContent='Playing: '+S.lastFile;
-    var dur=S.lastInsights.split(' ').length/2.5;
-    S.prog=0; S.timer=setInterval(function(){ S.prog+=(100/dur/10)*S.speed; if(S.prog>=100)S.prog=100; document.getElementById('apProg').style.width=S.prog+'%'; var e=Math.floor((S.prog/100)*dur); document.getElementById('apTime').textContent=Math.floor(e/60)+':'+String(Math.floor(e%60)).padStart(2,'0')+' / '+Math.floor(dur/60)+':'+String(Math.floor(dur%60)).padStart(2,'0'); },100);
-  } else { showToast('Audio not supported in this browser','warn-t'); }
-}
-function setSpd(s,btn){ S.speed=s; document.querySelectorAll('.ap-spd').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); }
-function simplifyExplanation(){ if(!S.lastInsights){ showToast('Run analysis first','warn-t'); return; } var el=document.getElementById('txt-simple'); el.textContent='In simple terms: your data has '+ document.getElementById('ov-rows').textContent+' records. Quality is '+document.getElementById('ov-qual').textContent+'. '+S.lastInsights.split('.')[0]+'.'; goto('results-sec'); }
-function explainChart(){ goto('charts-sec'); showToast('Select a column and chart type to visualize your data','ok-t'); }
 
 /* ── EXPORT ── */
 function exportPDF(){
   if(!S.lastFile){ showToast('Run analysis first','warn-t'); return; }
-  var content='STATLENS ANALYTICS REPORT
+  var content='STATLENS ANALYSIS REPORT
+========================
 
-';
-  content+='File: '+S.lastFile+'
+File: '+S.lastFile+'
 Date: '+new Date().toLocaleString()+'
+Analyzed by: '+currentUser.name+'
 
-';
-  content+='SUMMARY
+SUMMARY
+-------
 '+S.lastInsights+'
 
-';
-  content+='STATISTICS
-';
-  content+='Mean: '+document.getElementById('st-mean').textContent+'
-';
-  content+='Median: '+document.getElementById('st-med').textContent+'
-';
-  content+='Std Dev: '+document.getElementById('st-std').textContent+'
-';
-  content+='Min: '+document.getElementById('st-min').textContent+'
-';
-  content+='Max: '+document.getElementById('st-max').textContent+'
+STATISTICS
+----------
+Mean: '+document.getElementById('st-mean').textContent+'
+Median: '+document.getElementById('st-med').textContent+'
+Std Dev: '+document.getElementById('st-std').textContent+'
+Min: '+document.getElementById('st-min').textContent+'
+Max: '+document.getElementById('st-max').textContent+'
 
-';
-  content+='DATA QUALITY
-';
-  content+='Rows: '+document.getElementById('ov-rows').textContent+'
-';
-  content+='Columns: '+document.getElementById('ov-cols').textContent+'
-';
-  content+='Missing: '+document.getElementById('ov-miss').textContent+'
-';
-  content+='Quality Score: '+document.getElementById('ov-qual').textContent+'
-';
-  content+='Anomalies: '+document.getElementById('ov-anom').textContent+'
-';
-  var blob=new Blob([content],{type:'text/plain'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='statlens-report.txt'; a.click();
-  showToast('Report downloaded!','ok-t');
+DATA QUALITY
+------------
+Rows: '+document.getElementById('dq-rows').textContent+'
+Columns: '+document.getElementById('dq-cols').textContent+'
+Missing: '+document.getElementById('dq-miss').textContent+'
+Duplicates: '+document.getElementById('dq-dupe').textContent+'
+Quality Score: '+document.getElementById('qsNum').textContent+'
+
+Generated by StatLens — statlens-ten.vercel.app';
+  var blob=new Blob([content],{type:'text/plain'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a'); a.href=url; a.download='statlens-report-'+new Date().getTime()+'.txt'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('Report downloaded','ok-t');
 }
 
 function exportExcel(){
   if(!S.lastFile){ showToast('Run analysis first','warn-t'); return; }
-  var csv='Metric,Value
-';
-  csv+='File,'+S.lastFile+'
-';
-  csv+='Date,'+new Date().toLocaleString()+'
-';
-  csv+='Total Rows,'+document.getElementById('ov-rows').textContent+'
-';
-  csv+='Total Columns,'+document.getElementById('ov-cols').textContent+'
-';
-  csv+='Missing Values,'+document.getElementById('ov-miss').textContent+'
-';
-  csv+='Quality Score,'+document.getElementById('ov-qual').textContent+'
-';
-  csv+='Anomalies,'+document.getElementById('ov-anom').textContent+'
-';
-  csv+='Mean,'+document.getElementById('st-mean').textContent+'
-';
-  csv+='Median,'+document.getElementById('st-med').textContent+'
-';
-  csv+='Std Deviation,'+document.getElementById('st-std').textContent+'
-';
-  csv+='Minimum,'+document.getElementById('st-min').textContent+'
-';
-  csv+='Maximum,'+document.getElementById('st-max').textContent+'
-';
-  csv+='
-Insights,"'+S.lastInsights.replace(/"/g,"'")+'"';
-  var blob=new Blob([csv],{type:'text/csv'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='statlens-report.csv'; a.click();
-  showToast('Excel/CSV downloaded!','ok-t');
+  var rows=['Metric,Value'];
+  rows.push('File,'+S.lastFile);
+  rows.push('Date,'+new Date().toLocaleString());
+  rows.push('Analyzed By,'+currentUser.name);
+  rows.push('Total Rows,'+document.getElementById('dq-rows').textContent);
+  rows.push('Total Columns,'+document.getElementById('dq-cols').textContent);
+  rows.push('Missing Values,'+document.getElementById('dq-miss').textContent);
+  rows.push('Duplicates,'+document.getElementById('dq-dupe').textContent);
+  rows.push('Quality Score,'+document.getElementById('qsNum').textContent);
+  rows.push('Mean,'+document.getElementById('st-mean').textContent);
+  rows.push('Median,'+document.getElementById('st-med').textContent);
+  rows.push('Std Deviation,'+document.getElementById('st-std').textContent);
+  rows.push('Minimum,'+document.getElementById('st-min').textContent);
+  rows.push('Maximum,'+document.getElementById('st-max').textContent);
+  rows.push('Anomalies,'+document.getElementById('ov-anom').textContent);
+  rows.push('Insights,"'+S.lastInsights.replace(/"/g,"'")+'"');
+  if(S.chartData.length>0){
+    rows.push('');
+    rows.push('Column,Values');
+    S.chartData.forEach(function(col){ rows.push(col.name+','+col.values.join(',')); });
+  }
+  var blob=new Blob([rows.join('
+')],{type:'text/csv'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a'); a.href=url; a.download='statlens-data-'+new Date().getTime()+'.csv'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('Excel/CSV downloaded','ok-t');
 }
-
-/* ── REPORT ── */
-function genReport(){
-  if(!S.lastFile){ showToast('Run analysis first','warn-t'); return; }
-  document.getElementById('rptDate').textContent='Generated: '+new Date().toLocaleString()+' | File: '+S.lastFile;
-  document.getElementById('rptContent2').textContent=
-    'ANALYSIS SUMMARY
-'+S.lastInsights+
-    '
-
-STATISTICS
-Mean: '+document.getElementById('st-mean').textContent+
-    '
-Median: '+document.getElementById('st-med').textContent+
-    '
-Std Deviation: '+document.getElementById('st-std').textContent+
-    '
-Min: '+document.getElementById('st-min').textContent+
-    '
-Max: '+document.getElementById('st-max').textContent+
-    '
-
-DATA QUALITY
-Rows: '+document.getElementById('ov-rows').textContent+
-    ' | Columns: '+document.getElementById('ov-cols').textContent+
-    ' | Quality: '+document.getElementById('ov-qual').textContent+
-    ' | Anomalies: '+document.getElementById('ov-anom').textContent;
-  var p=document.getElementById('rptPrev'); p.style.display='block'; p.scrollIntoView({behavior:'smooth'});
-}
-
-/* ── ACTUARIAL ── */
-var toolNames={'claims-freq':'Claims Frequency & Severity','loss-ratio':'Loss Ratio Analysis','combined-ratio':'Combined Ratio','reserving':'Claims Reserving','scenario':'Scenario Testing','monte-carlo':'Monte Carlo Simulation'};
-function openTool(t){ showToast(toolNames[t]+' — coming in next update','warn-t'); }
 
 /* ── HELPERS ── */
 function animNum(id,target){ var el=document.getElementById(id); el.classList.remove('ph'); var s=0,step=Math.max(1,target/28),t=setInterval(function(){ s+=step; if(s>=target){s=target;clearInterval(t);} el.textContent=Math.round(s).toLocaleString(); },32); }
 function setV(id,v){ var el=document.getElementById(id); el.classList.remove('ph'); el.textContent=v; }
 function setTab(id,txt){ var el=document.getElementById(id); el.classList.remove('ph'); el.textContent=txt; }
-function swTab(name,btn){ document.querySelectorAll('.tp').forEach(function(p){p.classList.remove('active');}); document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');}); document.getElementById('tp-'+name).classList.add('active'); btn.classList.add('active'); }
 var progT;
 function startProg(){ var p=document.getElementById('pf'),w=document.getElementById('pw'); w.style.display='block'; p.style.width='0%'; var v=0; progT=setInterval(function(){ v+=Math.random()*7; if(v>84)v=84; p.style.width=v+'%'; },280); }
 function stopProg(){ clearInterval(progT); }
@@ -898,10 +853,35 @@ function setBtnOff(v){ document.getElementById('runBtn').disabled=v; }
 function showLoad(m){ document.getElementById('stLoad').style.display='flex'; document.getElementById('stTxt').textContent=m; document.getElementById('stErr').style.display='none'; }
 function showErr(m){ document.getElementById('stErr').textContent=m; document.getElementById('stErr').style.display='block'; document.getElementById('stLoad').style.display='none'; }
 function hideSt(){ document.getElementById('stLoad').style.display='none'; document.getElementById('stErr').style.display='none'; }
+function swTab(name,btn){ document.querySelectorAll('.tp').forEach(function(p){p.classList.remove('active');}); document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');}); document.getElementById('tp-'+name).classList.add('active'); btn.classList.add('active'); }
+function setQ(el){ document.getElementById('askTA').value=el.textContent; }
+function sendQ(){
+  var q=document.getElementById('askTA').value.trim(); if(!q) return;
+  var r=document.getElementById('askResp'); r.textContent='Thinking…'; r.style.display='block';
+  fetch(BACKEND+'/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})})
+    .then(function(x){return x.json();})
+    .then(function(d){ r.textContent=d.answer||'No answer.'; })
+    .catch(function(){ r.textContent='Could not reach server. Check your connection.'; });
+}
+function togglePlay(){
+  if(!S.lastInsights){ showToast('Run analysis first','warn-t'); return; }
+  if(window.speechSynthesis){
+    if(S.playing){ window.speechSynthesis.cancel(); S.playing=false; document.getElementById('apIcon').outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; clearInterval(S.timer); return; }
+    var utt=new SpeechSynthesisUtterance(S.lastInsights); utt.rate=S.speed;
+    utt.onend=function(){ S.playing=false; document.getElementById('apIcon').outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; clearInterval(S.timer); };
+    window.speechSynthesis.speak(utt); S.playing=true;
+    document.getElementById('apIcon').outerHTML='<svg id="apIcon" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+    var dur=S.lastInsights.split(' ').length/2.5;
+    S.prog=0; S.timer=setInterval(function(){ S.prog+=(100/dur/10)*S.speed; if(S.prog>=100)S.prog=100; document.getElementById('apProg').style.width=S.prog+'%'; var e=Math.floor((S.prog/100)*dur); document.getElementById('apTime').textContent=Math.floor(e/60)+':'+String(Math.floor(e%60)).padStart(2,'0'); },100);
+  } else { showToast('Audio not supported in this browser','warn-t'); }
+}
+function setSpd(s,btn){ S.speed=s; document.querySelectorAll('.ap-spd').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); }
+function simplify(){ if(!S.lastInsights){ showToast('Run analysis first','warn-t'); return; } document.getElementById('txt-simple').textContent='Simple summary: '+S.lastInsights.split('.')[0]+'. Your data quality is '+document.getElementById('qsNum').textContent+' and contains '+document.getElementById('dq-rows').textContent+' records.'; goto('results-sec'); swTab('simple',document.querySelector('.tab')); }
+function explainChart(){ if(!S.chartData.length){ showToast('Run analysis first','warn-t'); return; } var col=S.chartData[S.activeCol]; showToast('Chart shows '+col.name+' across '+(col.values.length)+' periods','ok-t'); goto('charts-sec'); }
+var toolNames={'claims-freq':'Claims Frequency & Severity','loss-ratio':'Loss Ratio Analysis','combined-ratio':'Combined Ratio','reserving':'Claims Reserving','scenario':'Scenario Testing','monte-carlo':'Monte Carlo Simulation'};
+function openTool(t){ showToast(toolNames[t]+' — coming soon','warn-t'); }
 function renderHist(){ var el=document.getElementById('histList'); if(!S.hist.length) return; el.innerHTML=S.hist.map(function(h){ return '<div class="hist-item"><div class="hi-ic">📊</div><div class="hi-info"><div class="hi-nm">'+h.name+'</div><div class="hi-mt">'+h.date+'</div></div><span class="hi-sc">'+h.quality+'%</span></div>'; }).join(''); }
 function showToast(msg,type){ var t=document.getElementById('toast'); document.getElementById('toastMsg').textContent=msg; t.className='toast '+(type||'ok-t')+' show'; clearTimeout(t._t); t._t=setTimeout(function(){ t.classList.remove('show'); },3500); }
-
-window.addEventListener('load', function(){ checkSession(); renderHist(); });
 </script>
 </body>
 </html>
